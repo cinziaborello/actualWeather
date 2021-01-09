@@ -1,11 +1,13 @@
 import React from 'react';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 
 const Today: React.FC = () => {
   const newDate:string = new Date().toDateString();
   return (
-    <div>
-      {newDate}
-    </div>
+    <Box>
+      <Typography>{newDate}</Typography>
+    </Box>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Box from '@material-ui/core/Box';
 import AppGrid from './controllerComponents/AppGrid';
 
 
@@ -16,11 +17,13 @@ const theme = createMuiTheme({
 });
 
 const App: React.FC = () => (
-  <div>
+  <Box>
     <ThemeProvider theme={theme}>
-      <AppGrid />
+      <Box bgcolor="#f0f0f0">
+        <AppGrid />
+      </Box>
     </ThemeProvider>
-  </div>
+  </Box>
 );
 
 export default App;

@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, fade } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Today from './Today';
+
 
 type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
@@ -60,16 +62,16 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.grow}>
+    <Box className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" noWrap>
               Weather App
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <Box className={classes.search}>
+            <Box className={classes.searchIcon}>
               <SearchIcon />
-            </div>
+            </Box>
             <InputBase
               placeholder="Search by city…"
               classes={{
@@ -82,13 +84,11 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
               onChange={handleChange}
               onKeyPress={handleEnter}
             />
-          </div>
-          <Typography noWrap>
-              <Today />
-          </Typography>
+          </Box>
+          <Today />
         </Toolbar>
       </AppBar>
-    </div>
+    </Box>
   );
 }
 
