@@ -3,17 +3,18 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Search from '../viewComponents/Search';
 import CurrentWeather from '../viewComponents/CurrentWeather';
+import FavoritesList from './FavoritesList';
 
 
 const AppGrid: React.FC = () => {
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState<string>('');
   const [data, setData] = useState<any>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
   };
 
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+  const fetchCurrentWeather = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.code === 'Enter') {
       fetch(`/api/weather/${keyword}`)
         .then(result => result.json())
@@ -25,25 +26,29 @@ const AppGrid: React.FC = () => {
     }
   };
 
-  let currentWeather;
+  let currentWeather:any;
 
   if (data) {
     currentWeather = <CurrentWeather data={data} />;
   } else {
-    currentWeather = <Box>right column</Box>;
+    currentWeather = null;
   }
 
   return (
     <Box >
-      <Grid container spacing={1}>
-          <Search handleChange={handleChange} handleEnter={handleEnter} keyword={keyword} />
+      <Grid>
+          <Search
+            handleChange={handleSearchChange}
+            handleEnter={fetchCurrentWeather}
+            keyword={keyword}
+          />
       </Grid>
-      <Grid container spacing={2}>
-        <Grid item>
-          {currentWeather}
+      <Grid container spacing={3}>
+        <Grid item xs={2}>
+          <FavoritesList />
         </Grid>
-        <Grid item>
-          <Box>left column</Box>
+        <Grid item xs={4}>
+          {currentWeather}
         </Grid>
       </Grid>
     </Box>

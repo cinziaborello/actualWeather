@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 
 
 const MyCard = styled(Card)({
-  background: '#fff',
+  background: '#f4f1bb',
   border: 3,
   borderRadius: 10,
   minHeight: '40%',

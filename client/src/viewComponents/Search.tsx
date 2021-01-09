@@ -5,7 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
+import CloudIcon from '@material-ui/icons/Cloud';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import SearchIcon from '@material-ui/icons/Search';
+import TodayIcon from '@material-ui/icons/Today';
 import Today from './Today';
 
 
@@ -51,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
-      [theme.breakpoints.up('md')]: {
+      [theme.breakpoints.up('sm')]: {
         width: '20ch',
       },
     }
@@ -65,8 +68,10 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
     <Box className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
+          <CloudIcon />
+          <WbSunnyIcon />
           <Typography variant="h6" noWrap>
-              Weather App
+              Actual Weather
           </Typography>
           <Box className={classes.search}>
             <Box className={classes.searchIcon}>
@@ -85,6 +90,7 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
               onKeyPress={handleEnter}
             />
           </Box>
+          <TodayIcon />
           <Today />
         </Toolbar>
       </AppBar>
