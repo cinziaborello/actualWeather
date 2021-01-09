@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Today = ():JSX.Element => {
+const Today: React.FC = () => {
   const newDate:string = new Date().toDateString();
   return (
     <div>

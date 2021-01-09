@@ -1,9 +1,25 @@
 import React from 'react';
-import AppGrid from './viewComponents/AppGrid';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import AppGrid from './controllerComponents/AppGrid';
 
-const App = ():JSX.Element => (
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#00bcd4',
+    },
+    secondary: {
+      main: '#ffc400',
+    },
+  },
+});
+
+const App: React.FC = () => (
   <div>
-    <AppGrid />
+    <ThemeProvider theme={theme}>
+      <AppGrid />
+    </ThemeProvider>
   </div>
 );
 
