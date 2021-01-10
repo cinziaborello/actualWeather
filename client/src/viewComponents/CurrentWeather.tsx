@@ -8,10 +8,11 @@ import Button from '@material-ui/core/Button';
 import Today from './Today';
 
 type Props = {
-  data: any
+  data: any,
+  handleButtonClick: (lat: number, lon: number) => void
 };
 
-const CurrentWeather: React.FC<Props> = ({ data }) => {
+const CurrentWeather: React.FC<Props> = ({ data, handleButtonClick }) => {
   let current:any;
   if (data === 'error') {
     current = (
@@ -29,7 +30,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
         <Typography>{data.weather[0].main}</Typography>
         <Typography>{data.main.temp.toFixed()} &#8457; </Typography>
         <Typography>Feels like: {data.main.feels_like.toFixed()} &#8457;</Typography>
-        <Button>See forecast</Button>
+        <Button onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>See forecast</Button>
       </MyCard>
     );
   } else {
