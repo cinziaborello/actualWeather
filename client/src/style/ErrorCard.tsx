@@ -2,14 +2,14 @@ import { styled } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 
 
-const MyCard = styled(Card)({
-  background: '#f4f1bb',
+const ErrorCard = styled(Card)({
+  background: '#f44336',
   border: 3,
   borderRadius: 10,
-  minHeight: '40%',
-  padding: '30px',
+  minHeight: '50%',
+  padding: '10px',
   marginTop: '30px',
-  width: '100%'
+  width: '100%',
 });
 
-export default MyCard;
+export default ErrorCard;

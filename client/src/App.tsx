@@ -1,6 +1,7 @@
 import React from 'react';
 import { createMuiTheme, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import AppGrid from './controllerComponents/AppGrid';
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
   return (
   <Box>
     <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <StyledBox>
         <AppGrid />
       </StyledBox>

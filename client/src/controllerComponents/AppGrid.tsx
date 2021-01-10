@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Search from '../viewComponents/Search';
 import CurrentWeather from '../viewComponents/CurrentWeather';
-import FavoritesList from './FavoritesList';
 
 
 const AppGrid: React.FC = () => {
@@ -45,7 +44,7 @@ const AppGrid: React.FC = () => {
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={2}>
-          <FavoritesList />
+          <Box> left </Box>
         </Grid>
         <Grid item xs={4}>
           {currentWeather}

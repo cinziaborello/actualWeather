@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '25%',
       },
     },
-    searchIcon: {
+    iconSearch: {
       padding: theme.spacing(0, 2),
       height: '100%',
       position: 'absolute',
@@ -74,7 +74,7 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
               Actual Weather
           </Typography>
           <Box className={classes.search}>
-            <Box className={classes.searchIcon}>
+            <Box className={classes.iconSearch}>
               <SearchIcon />
             </Box>
             <InputBase
