@@ -29,12 +29,11 @@ type Props = {
 };
 
 const ForecastWeather: React.FC<Props> = ({ data }) => {
-
   let forecast:any;
   if (data === 'error') {
     forecast = (
       <ErrorCard>
-          <ErrorIcon />
+        <ErrorIcon />
           We couldn't retrieve the forecast.
       </ErrorCard>);
   } else if (data) {

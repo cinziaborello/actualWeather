@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme, withStyles, fade } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import TopBar from '../viewComponents/TopBar';
 import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
+import SearchInput from '../viewComponents/SearchInput';
 
+
+const StyledCard = withStyles({
+  root: {
+    background: '#f4f1bb',
+    border: 3,
+    borderRadius: 10,
+    minHeight: '15vh',
+    padding: '10px 0',
+    margin: '10px 30px',
+    textAlign: 'center'
+  }
+})(Card);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,9 +30,21 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.secondary
+    },
+    search: {
+      backgroundColor: fade(theme.palette.common.white, 0.50),
+      '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.70)
+      },
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(5),
+        marginRight: theme.spacing(5),
+        width: '80%'
+      },
+      margin: '20px 0'
     }
-  }),
+  })
 );
 
 const AppGrid: React.FC = () => {
@@ -29,7 +57,6 @@ const AppGrid: React.FC = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
-
   };
 
   const fetchCurrentWeather = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -60,9 +87,30 @@ const AppGrid: React.FC = () => {
 
   let currentWeather:any;
   if (currentData) {
-    currentWeather = <CurrentWeather data={currentData} handleButtonClick={fetchWeatherForecast} />;
+    currentWeather = (
+      <CurrentWeather
+        data={currentData}
+        handleButtonClick={fetchWeatherForecast}
+      />
+    );
   } else {
-    currentWeather = null;
+    currentWeather = (
+      <StyledCard>
+        <Typography variant='h6'>
+          Welcome to Actual Weather!
+        </Typography>
+        <Typography variant='subtitle2'>
+          To begin, search for a city by name
+        </Typography>
+        <Box className={classes.search}>
+          <SearchInput
+            handleChange={handleSearchChange}
+            handleEnter={fetchCurrentWeather}
+            keyword={keyword}
+          />
+       </Box>
+      </StyledCard>
+    );
   }
 
   return (
@@ -86,7 +134,6 @@ const AppGrid: React.FC = () => {
       </Grid>
       <ForecastWeather data={forecastData} />
     </div>
-
   );
 }
 

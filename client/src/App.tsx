@@ -9,12 +9,12 @@ import AppGrid from './controllerComponents/AppGrid';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#00bcd4',
+      main: '#00bcd4'
     },
     secondary: {
-      main: '#ff6640',
-    },
-  },
+      main: '#ff6640'
+    }
+  }
 });
 
 const StyledBox = withStyles({
@@ -24,9 +24,7 @@ const StyledBox = withStyles({
     }
   })(Box);
 
-const App: React.FC = () => {
-
-  return (
+const App: React.FC = () => (
   <Box>
     <ThemeProvider theme={theme}>
       <CssBaseline/>
@@ -35,7 +33,6 @@ const App: React.FC = () => {
       </StyledBox>
     </ThemeProvider>
   </Box>
-  );
-};
+);
 
 export default App;

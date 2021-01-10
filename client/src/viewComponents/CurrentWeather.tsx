@@ -41,8 +41,8 @@ const CurrentWeather: React.FC<Props> = ({ data, handleButtonClick }) => {
   if (data === 'error') {
     current = (
       <ErrorCard>
-          <ErrorIcon />
-          Invalid city name
+        <ErrorIcon />
+        Invalid city name
       </ErrorCard>);
   } else if (data) {
     let iconURL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
