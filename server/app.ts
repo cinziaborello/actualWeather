@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.set('view engine', 'html');
 
 // invoke the controller to retrieve the current weather data from the external service
-app.get('/api/current/:keyword', (req, res) => {
+app.get('/api/current/:city', (req, res) => {
   weatherAPI.getCurrentWeather(req, res);
 });
 

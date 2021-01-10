@@ -4,7 +4,7 @@ const ENV = require('../.env.ts');
 const BASE_URL = 'http://api.openweathermap.org/data/2.5/';
 
 const getCurrentWeather = (req, res) => {
-  const city = req.params.keyword;
+  const city = req.params.city;
   axios.get(`${BASE_URL}weather?q=${city}&units=imperial&appid=${ENV.API_KEY}`)
   .then(response => {
     res.status(200).send(response.data);
