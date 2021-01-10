@@ -14,6 +14,16 @@ const StyledBox = withStyles({
   }
 })(Box);
 
+const StyledGridList = withStyles({
+  root: {
+    background: '#ff6640',
+    padding: '10px',
+    border: 3,
+    borderRadius: 10,
+    textAlign: 'center'
+  }
+})(GridList);
+
 type Props = {
   data: any
 };
@@ -31,7 +41,7 @@ const ForecastWeather: React.FC<Props> = ({ data }) => {
     const fiveDaysForecast = data.daily.slice(0, 5);
     forecast = (
       <StyledBox>
-      <GridList cols={5} cellHeight="auto" spacing={15} >
+      <StyledGridList cols={5} cellHeight="auto" spacing={15}>
         {fiveDaysForecast.map((day: any) => (
           <GridListTile>
             <ForecastDate
@@ -40,7 +50,7 @@ const ForecastWeather: React.FC<Props> = ({ data }) => {
             />
           </GridListTile>
         ))}
-      </GridList>
+      </StyledGridList>
       </StyledBox>
     );
   } else {

@@ -8,8 +8,11 @@ const ErrorCard = styled(Card)({
   borderRadius: 10,
   minHeight: '50%',
   padding: '10px',
-  marginTop: '30px',
+  margin: '10px 30px',
   width: '100%',
+  textAlign: 'center',
+  fontSize: '1.2em',
+  fontWeight: 'bold'
 });
 
 export default ErrorCard;

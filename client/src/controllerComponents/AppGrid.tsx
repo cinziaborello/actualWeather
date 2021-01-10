@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Search from '../viewComponents/Search';
+import TopBar from '../viewComponents/TopBar';
 import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
 
@@ -9,8 +9,7 @@ import ForecastWeather from '../viewComponents/ForecastWeather';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
-      background: 'red'
+      flexGrow: 1
     },
     paper: {
       padding: theme.spacing(2),
@@ -30,6 +29,7 @@ const AppGrid: React.FC = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
+
   };
 
   const fetchCurrentWeather = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -38,8 +38,11 @@ const AppGrid: React.FC = () => {
         .then(result => result.json())
         .then(res => setCurrentData(res))
         .then(() => setForecastData(null))
+        .then(() => setKeyword(''))
         .catch(err => {
           setCurrentData('error');
+          setForecastData(null);
+          setKeyword('');
           console.log(err);
         });
     }
@@ -66,7 +69,7 @@ const AppGrid: React.FC = () => {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Search
+          <TopBar
             handleChange={handleSearchChange}
             handleEnter={fetchCurrentWeather}
             keyword={keyword}
@@ -74,10 +77,10 @@ const AppGrid: React.FC = () => {
         </Grid>
       </Grid>
       <Grid container spacing={3} className={classes.root}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           {currentWeather}
         </Grid>
-        {/* <Grid item xs={6}>
+        {/* <Grid item xs={4}>
           <Paper className={classes.paper}>other column</Paper>
         </Grid> */}
       </Grid>

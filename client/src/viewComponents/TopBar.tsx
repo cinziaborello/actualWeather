@@ -4,12 +4,12 @@ import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import CloudIcon from '@material-ui/icons/Cloud';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import SearchIcon from '@material-ui/icons/Search';
 import TodayIcon from '@material-ui/icons/Today';
 import Today from './Today';
+import SearchInput from '../viewComponents/SearchInput';
 
 
 type Props = {
@@ -45,18 +45,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '20ch',
-      },
     }
   })
 );
@@ -77,17 +65,10 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
             <Box className={classes.iconSearch}>
               <SearchIcon />
             </Box>
-            <InputBase
-              placeholder="Search by city…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search box' }}
-              type="text"
-              value={keyword}
-              onChange={handleChange}
-              onKeyPress={handleEnter}
+            <SearchInput
+              handleChange={handleChange}
+              handleEnter={handleEnter}
+              keyword={keyword}
             />
           </Box>
           <TodayIcon />
