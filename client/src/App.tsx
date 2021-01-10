@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 const StyledBox = withStyles({
     root: {
       background: '#e0f7fa',
-      height: '100vh'
+      height: '50rem'
     }
   })(Box);
 

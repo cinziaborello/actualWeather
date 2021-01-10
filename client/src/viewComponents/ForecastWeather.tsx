@@ -8,14 +8,14 @@ import ForecastDate from './ForecastDate';
 
 const StyledBox = withStyles({
   root: {
-    margin: '0 3em'
+    margin: '0 3rem'
   }
 })(Box);
 
 const StyledGridList = withStyles({
   root: {
     background: '#ff6640',
-    padding: '1em',
+    padding: '1rem',
     border: 3,
     borderRadius: 10,
     textAlign: 'center'

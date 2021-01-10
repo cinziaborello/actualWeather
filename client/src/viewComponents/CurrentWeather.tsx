@@ -12,17 +12,17 @@ const StyledCard = withStyles({
     border: 3,
     borderRadius: 10,
     minHeight: '40%',
-    padding: '1em 0',
+    padding: '1rem 0',
     width: '100%',
-    margin: '1em 3em',
+    margin: '1rem 3rem',
     textAlign: 'center'
   }
 })(Card);
 
 const StyledPaper = withStyles({
   root: {
-    margin: '1em auto',
-    padding: '.5em',
+    margin: '1rem auto',
+    padding: '.5rem',
     width: '80%'
   }
 })(Paper);
@@ -46,6 +46,7 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick }) => 
     let city = `${data.name}, ${data.sys.country}`;
     current = (
       <StyledCard>
+        Currently in
         <StyledPaper>
           <WeatherInfo
             header={city}

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#f4f1bb',
       border: 3,
       borderRadius: theme.shape.borderRadius,
-      minHeight: '15vh',
+      minHeight: '10rem',
       padding: theme.spacing(3),
       margin: theme.spacing(3),
       textAlign: 'center'
