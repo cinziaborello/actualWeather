@@ -1,14 +1,25 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 import ErrorCard from '../style/ErrorCard';
 import ErrorIcon from '@material-ui/icons/Error';
 import ForecastDate from './ForecastDate';
+
+
+const StyledBox = withStyles({
+  root: {
+    margin: '0 30px'
+  }
+})(Box);
 
 type Props = {
   data: any
 };
 
 const ForecastWeather: React.FC<Props> = ({ data }) => {
+
   let forecast:any;
   if (data === 'error') {
     forecast = (
@@ -17,9 +28,21 @@ const ForecastWeather: React.FC<Props> = ({ data }) => {
           We couldn't retrieve the forecast.
       </ErrorCard>);
   } else if (data) {
-    forecast = data.daily.map((day: any) => (
-      <ForecastDate dayData={day} />
-    ));
+    const fiveDaysForecast = data.daily.slice(0, 5);
+    forecast = (
+      <StyledBox>
+      <GridList cols={5} cellHeight="auto" spacing={15} >
+        {fiveDaysForecast.map((day: any) => (
+          <GridListTile>
+            <ForecastDate
+              dayData={day}
+              key={day.dt}
+            />
+          </GridListTile>
+        ))}
+      </GridList>
+      </StyledBox>
+    );
   } else {
     forecast = null;
   }

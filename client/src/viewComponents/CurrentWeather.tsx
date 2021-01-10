@@ -1,11 +1,25 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MyCard from '../style/MyCard';
+import Card from '@material-ui/core/Card';
 import ErrorCard from '../style/ErrorCard';
 import ErrorIcon from '@material-ui/icons/Error';
 import Button from '@material-ui/core/Button';
 import Today from './Today';
+
+
+const StyledCard = withStyles({
+  root: {
+    background: '#f4f1bb',
+    border: 3,
+    borderRadius: 10,
+    minHeight: '40%',
+    padding: '30px',
+    width: '100%',
+    margin: '10px 30px'
+  }
+})(Card);
 
 type Props = {
   data: any,
@@ -23,15 +37,15 @@ const CurrentWeather: React.FC<Props> = ({ data, handleButtonClick }) => {
   } else if (data) {
     let iconURL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     current = (
-      <MyCard>
+      <StyledCard>
         <Today />
         <Typography>{data.name}, {data.sys.country}</Typography>
         <img src={iconURL} alt={data.weather.description} />
         <Typography>{data.weather[0].main}</Typography>
         <Typography>{data.main.temp.toFixed()} &#8457; </Typography>
         <Typography>Feels like: {data.main.feels_like.toFixed()} &#8457;</Typography>
-        <Button onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>See forecast</Button>
-      </MyCard>
+        <Button onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>See 5 days forecast</Button>
+      </StyledCard>
     );
   } else {
     current = null;
