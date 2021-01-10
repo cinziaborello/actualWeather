@@ -12,9 +12,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set('view engine', 'html');
 
-// invoke the controller to retrieve the data from the external service
-app.get('/api/weather/:keyword', (req, res) => {
+// invoke the controller to retrieve the current weather data from the external service
+app.get('/api/current/:keyword', (req, res) => {
   weatherAPI.getCurrentWeather(req, res);
+});
+
+// invoke the controller to retrieve the weather forecast data from the external service
+app.get('/api/forecast/:coordinates', (req, res) => {
+  weatherAPI.getForecast(req, res);
 });
 
 // catch 404 and forward to error handler
