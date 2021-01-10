@@ -10,6 +10,7 @@ const AppGrid: React.FC = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [currentData, setCurrentData] = useState<any>(null);
   const [forecastData, setForecastData] = useState<any>(null);
+  const [units, setUnits] = useState<string>('imperial');
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
@@ -17,9 +18,10 @@ const AppGrid: React.FC = () => {
 
   const fetchCurrentWeather = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.code === 'Enter') {
-      fetch(`/api/current/${keyword}`)
+      fetch(`/api/current/${keyword}/${units}`)
         .then(result => result.json())
         .then(res => setCurrentData(res))
+        .then(() => setForecastData(null))
         .catch(err => {
           setCurrentData('error');
           console.log(err);
@@ -28,7 +30,7 @@ const AppGrid: React.FC = () => {
   };
 
   const fetchWeatherForecast = (lat: number, lon: number): void => {
-    fetch(`/api/forecast/lat=${lat}&lon=${lon}`)
+    fetch(`/api/forecast/${lat}/${lon}/${units}`)
       .then(result => result.json())
       .then(res => setForecastData(res))
       .catch(err => {
@@ -48,25 +50,25 @@ const AppGrid: React.FC = () => {
 
   return (
     <Box >
-      <Grid>
+      <div>
           <Search
             handleChange={handleSearchChange}
             handleEnter={fetchCurrentWeather}
             keyword={keyword}
           />
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={1}>
-        </Grid>
-        <Grid item xs={4}>
+      </div>
+      <div >
+        <div >
+        </div>
+        <div >
           {currentWeather}
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={2}>
+        </div>
+      </div>
+
+        <div >
           <ForecastWeather data={forecastData} />
-        </Grid>
-      </Grid>
+
+      </div>
     </Box>
   );
 }

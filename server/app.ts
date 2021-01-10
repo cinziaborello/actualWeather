@@ -13,12 +13,12 @@ app.use(cookieParser());
 app.set('view engine', 'html');
 
 // invoke the controller to retrieve the current weather data from the external service
-app.get('/api/current/:city', (req, res) => {
+app.get('/api/current/:city/:units', (req, res) => {
   weatherAPI.getCurrentWeather(req, res);
 });
 
 // invoke the controller to retrieve the weather forecast data from the external service
-app.get('/api/forecast/:coordinates', (req, res) => {
+app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
   weatherAPI.getForecast(req, res);
 });
 
