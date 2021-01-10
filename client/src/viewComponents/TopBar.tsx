@@ -1,9 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {Box, AppBar, Toolbar, Typography } from '@material-ui/core';
 import CloudIcon from '@material-ui/icons/Cloud';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import TodayIcon from '@material-ui/icons/Today';
@@ -34,7 +31,7 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
         <Toolbar>
           <CloudIcon />
           <WbSunnyIcon />
-          <Typography variant="h5" noWrap>
+          <Typography variant="h4" noWrap>
               Actual Weather
           </Typography>
           <SearchInput

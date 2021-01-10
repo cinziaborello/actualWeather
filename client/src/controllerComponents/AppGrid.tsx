@@ -1,36 +1,16 @@
 import React, { useState } from 'react';
-import { makeStyles, createStyles, Theme, withStyles, fade } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, createStyles, Theme, fade } from '@material-ui/core/styles';
+import { Box, Card, Grid, Typography } from '@material-ui/core';
 import TopBar from '../viewComponents/TopBar';
 import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
 import SearchInput from '../viewComponents/SearchInput';
 
 
-const StyledCard = withStyles({
-  root: {
-    background: '#f4f1bb',
-    border: 3,
-    borderRadius: 10,
-    minHeight: '15vh',
-    padding: '10px 0',
-    margin: '10px 30px',
-    textAlign: 'center'
-  }
-})(Card);
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary
     },
     search: {
       backgroundColor: fade(theme.palette.common.white, 0.50),
@@ -42,7 +22,16 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: theme.spacing(5),
         width: '80%'
       },
-      margin: '20px 0'
+      margin: theme.spacing(2)
+    },
+    welcome: {
+      backgroundColor: '#f4f1bb',
+      border: 3,
+      borderRadius: theme.shape.borderRadius,
+      minHeight: '15vh',
+      padding: theme.spacing(3),
+      margin: theme.spacing(3),
+      textAlign: 'center'
     }
   })
 );
@@ -69,7 +58,6 @@ const AppGrid: React.FC = () => {
         .catch(err => {
           setCurrentData('error');
           setForecastData(null);
-          setKeyword('');
           console.log(err);
         });
     }
@@ -85,21 +73,22 @@ const AppGrid: React.FC = () => {
       });
   };
 
-  let currentWeather:any;
+  let currentWeather: JSX.Element;
   if (currentData) {
     currentWeather = (
       <CurrentWeather
+        units={units}
         data={currentData}
         handleButtonClick={fetchWeatherForecast}
       />
     );
   } else {
     currentWeather = (
-      <StyledCard>
-        <Typography variant='h6'>
+      <Card className={classes.welcome}>
+        <Typography variant='h6' noWrap>
           Welcome to Actual Weather!
         </Typography>
-        <Typography variant='subtitle2'>
+        <Typography variant='subtitle2' noWrap>
           To begin, search for a city by name
         </Typography>
         <Box className={classes.search}>
@@ -109,7 +98,7 @@ const AppGrid: React.FC = () => {
             keyword={keyword}
           />
        </Box>
-      </StyledCard>
+      </Card>
     );
   }
 
@@ -132,7 +121,10 @@ const AppGrid: React.FC = () => {
           <Paper className={classes.paper}>other column</Paper>
         </Grid> */}
       </Grid>
-      <ForecastWeather data={forecastData} />
+      <ForecastWeather
+        units={units}
+        data={forecastData}
+      />
     </div>
   );
 }

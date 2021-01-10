@@ -1,8 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
+import { Box, Card } from '@material-ui/core';
+import WeatherInfo from './WeatherInfo';
 
 
 const StyledCard = withStyles({
@@ -12,26 +11,30 @@ const StyledCard = withStyles({
 })(Card);
 
 type Props = {
+  units: string,
   dayData: any
 };
 
-const ForecastDate: React.FC<Props> = ({ dayData }) => {
+const ForecastDate: React.FC<Props> = ({ units, dayData }) => {
   const thisDate: string = new Date(dayData.dt * 1000).toLocaleDateString('en-US', {
     day:   'numeric',
     month: 'short',
     year:  'numeric'
   });
 
-  let thisDayWeather: any;
+  let thisDayWeather: JSX.Element|null;
   if (dayData) {
-    let iconURL = `http://openweathermap.org/img/wn/${dayData.weather[0].icon}@2x.png`;
     thisDayWeather = (
       <StyledCard>
-        <Typography>{thisDate}</Typography>
-        <img src={iconURL} alt={dayData.weather.description} />
-        <Typography>{dayData.weather[0].main}</Typography>
-        <Typography>{dayData.temp.day.toFixed()} &#8457; </Typography>
-        <Typography>Feels like: {dayData.feels_like.day.toFixed()} &#8457;</Typography>
+        <WeatherInfo
+          header={thisDate}
+          iconSrc={dayData.weather[0].icon}
+          description={dayData.weather.description}
+          weatherMain={dayData.weather[0].main}
+          actualTemp={dayData.temp.day}
+          feelsLike={dayData.feels_like.day}
+          units={units}
+        />
       </StyledCard>
     );
   } else {

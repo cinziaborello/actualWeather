@@ -1,13 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import Paper from '@material-ui/core/Paper';
-import ErrorCard from '../style/ErrorCard';
+import { Box, Card, Paper, Button } from '@material-ui/core';
 import ErrorIcon from '@material-ui/icons/Error';
-import Button from '@material-ui/core/Button';
-import Today from './Today';
+import ErrorCard from '../style/ErrorCard';
+import WeatherInfo from './WeatherInfo';
 
 
 const StyledCard = withStyles({
@@ -16,47 +12,54 @@ const StyledCard = withStyles({
     border: 3,
     borderRadius: 10,
     minHeight: '40%',
-    padding: '10px 0',
+    padding: '1em 0',
     width: '100%',
-    margin: '10px 30px',
+    margin: '1em 3em',
     textAlign: 'center'
   }
 })(Card);
 
 const StyledPaper = withStyles({
   root: {
-    margin: '10px auto',
-    padding: '10px',
+    margin: '1em auto',
+    padding: '.5em',
     width: '80%'
   }
 })(Paper);
 
 type Props = {
+  units : string,
   data: any,
   handleButtonClick: (lat: number, lon: number) => void
 };
 
-const CurrentWeather: React.FC<Props> = ({ data, handleButtonClick }) => {
-  let current:any;
+const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick }) => {
+  let current: JSX.Element|null;
   if (data === 'error') {
     current = (
       <ErrorCard>
         <ErrorIcon />
-        Invalid city name
-      </ErrorCard>);
+        Invalid city name, try again.
+      </ErrorCard>
+    );
   } else if (data) {
-    let iconURL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    let city = `${data.name}, ${data.sys.country}`;
     current = (
       <StyledCard>
-        <Today />
         <StyledPaper>
-          <Typography>{data.name}, {data.sys.country}</Typography>
-          <img src={iconURL} alt={data.weather.description} />
-          <Typography>{data.weather[0].main}</Typography>
-          <Typography>{data.main.temp.toFixed()} &#8457; </Typography>
-          <Typography>Feels like: {data.main.feels_like.toFixed()} &#8457;</Typography>
+          <WeatherInfo
+            header={city}
+            iconSrc={data.weather[0].icon}
+            description={data.weather.description}
+            weatherMain={data.weather[0].main}
+            actualTemp={data.main.temp}
+            feelsLike={data.main.feels_like}
+            units={units}
+          />
         </StyledPaper>
-        <Button variant="contained" color="primary" onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>See 5 days forecast</Button>
+        <Button variant="contained" color="primary" onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>
+          See 5 days forecast
+        </Button>
       </StyledCard>
     );
   } else {

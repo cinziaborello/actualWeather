@@ -1,9 +1,9 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import { Box, Typography } from '@material-ui/core';
+
 
 const Today: React.FC = () => {
-  const newDate:string = new Date().toLocaleDateString('en-US', {
+  const newDate: string = new Date().toLocaleDateString('en-US', {
     day:   'numeric',
     month: 'short',
     year:  'numeric'
@@ -11,7 +11,7 @@ const Today: React.FC = () => {
 
   return (
     <Box>
-      <Typography>{newDate}</Typography>
+      <Typography variant='h6' noWrap>{newDate}</Typography>
     </Box>
   );
 };

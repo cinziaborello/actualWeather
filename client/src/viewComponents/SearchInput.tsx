@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, fade } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { Box, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 
 
 type Props = {

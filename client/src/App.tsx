@@ -1,8 +1,7 @@
 import React from 'react';
 import { createMuiTheme, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
+import { CssBaseline, Box } from '@material-ui/core';
 import AppGrid from './controllerComponents/AppGrid';
 
 
