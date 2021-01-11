@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TopBar from '../viewComponents/TopBar';
 import CurrentWeather from '../viewComponents/CurrentWeather';
@@ -7,7 +7,7 @@ import ForecastWeather from '../viewComponents/ForecastWeather';
 import WelcomeCard from '../viewComponents/WelcomeCard';
 
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1
@@ -19,8 +19,8 @@ const AppGrid: React.FC = () => {
   const classes = useStyles();
 
   const [keyword, setKeyword] = useState<string>('');
-  const [currentData, setCurrentData] = useState<any>(null);
-  const [forecastData, setForecastData] = useState<any>(null);
+  const [currentData, setCurrentData] = useState<any|null>(null);
+  const [forecastData, setForecastData] = useState<any|null>(null);
   const [units, setUnits] = useState<boolean>(false);
 
   const degrees: string = units === true ? 'metric' : 'imperial';

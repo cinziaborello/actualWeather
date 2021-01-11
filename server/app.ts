@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import weatherAPI from './controllers/weather';
+import { getCurrentWeather, getForecast } from './controllers/weather';
 
 const app = express();
 const port = 8080;
@@ -14,7 +14,7 @@ app.set('view engine', 'html');
 
 // invoke the controller to retrieve the current weather data
 app.get('/api/current/:city/:units', (req, res) => {
-  weatherAPI.getCurrentWeather(req.params.city, req.params.units)
+  getCurrentWeather(req.params.city, req.params.units)
     .then(results => {
       res.status(200).send(results);
     })
@@ -25,7 +25,7 @@ app.get('/api/current/:city/:units', (req, res) => {
 
 // invoke the controller to retrieve the weather forecast data
 app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
-  weatherAPI.getForecast(req.params.lat, req.params.lon, req.params.units)
+  getForecast(req.params.lat, req.params.lon, req.params.units)
     .then(results => {
       res.status(200).send(results);
     })
