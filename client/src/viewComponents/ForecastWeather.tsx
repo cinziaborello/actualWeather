@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Box, GridList, GridListTile } from '@material-ui/core';
 import ErrorIcon from '@material-ui/icons/Error';
-import ErrorCard from '../style/ErrorCard';
+import ErrorCard from '../uiComponents/ErrorCard';
 import ForecastDate from './ForecastDate';
 
 

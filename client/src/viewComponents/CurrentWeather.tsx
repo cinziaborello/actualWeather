@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Box, Card, Paper, Button } from '@material-ui/core';
 import ErrorIcon from '@material-ui/icons/Error';
-import ErrorCard from '../style/ErrorCard';
+import ErrorCard from '../uiComponents/ErrorCard';
 import WeatherInfo from './WeatherInfo';
 
 

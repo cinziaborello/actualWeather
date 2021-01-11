@@ -64,11 +64,11 @@ const AppGrid: React.FC = () => {
 
     if (units) {
       setUnits(false);
-      if (currentData) {
+      if (currentData && currentData !== 'error') {
         currentData.main.temp = celsiusToFahrenheit(currentData.main.temp);
         currentData.main.feels_like = celsiusToFahrenheit(currentData.main.feels_like);
       }
-      if (forecastData) {
+      if (forecastData && forecastData !== 'error') {
         forecastData.daily.forEach((forecast: any) => {
           forecast.temp.day = celsiusToFahrenheit(forecast.temp.day);
           forecast.feels_like.day = celsiusToFahrenheit(forecast.feels_like.day);
@@ -76,11 +76,11 @@ const AppGrid: React.FC = () => {
       }
     } else {
       setUnits(true);
-      if (currentData) {
+      if (currentData && currentData !== 'error') {
         currentData.main.temp = fahrenheitToCelsius(currentData.main.temp);
         currentData.main.feels_like = fahrenheitToCelsius(currentData.main.feels_like);
       }
-      if (forecastData) {
+      if (forecastData && forecastData !== 'error') {
         forecastData.daily.forEach((forecast: any) => {
           forecast.temp.day = fahrenheitToCelsius(forecast.temp.day);
           forecast.feels_like.day = fahrenheitToCelsius(forecast.feels_like.day);
