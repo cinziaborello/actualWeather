@@ -3,6 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { getCurrentWeather, getForecast } from './controllers/weather';
+import { getFavorites, addFavorites } from './controllers/favorites';
 
 const app = express();
 const port = 8080;
@@ -31,6 +32,28 @@ app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
     })
     .catch(() => {
       res.status(500).send('Error in retrieving weather forecast');
+    });
+});
+
+// invoke the controller to retrieve list of favorite cities
+app.get('/api/favorites/', (req, res) => {
+  getFavorites()
+    .then(favorites => {
+      res.status(200).send(favorites);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
+// invoke the controller to add a new city to favorites
+app.post('/api/favorites/:cityName', (req, res) => {
+  addFavorites(req.params.cityName)
+    .then(success => {
+      res.status(200).send(success);
+    })
+    .catch(err => {
+      res.status(500).send(err);
     });
 });
 
