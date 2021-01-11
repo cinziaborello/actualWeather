@@ -11,7 +11,7 @@ const StyledCard = withStyles({
 })(Card);
 
 type Props = {
-  units: string,
+  units: boolean,
   dayData: any
 };
 

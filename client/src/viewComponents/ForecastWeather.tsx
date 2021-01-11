@@ -23,7 +23,7 @@ const StyledGridList = withStyles({
 })(GridList);
 
 type Props = {
-  units: string,
+  units: boolean,
   data: any,
 };
 

@@ -28,7 +28,7 @@ const StyledPaper = withStyles({
 })(Paper);
 
 type Props = {
-  units : string,
+  units : boolean,
   data: any,
   handleButtonClick: (lat: number, lon: number) => void
 };
@@ -39,7 +39,7 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick }) => 
     current = (
       <ErrorCard>
         <ErrorIcon />
-        Invalid city name, try again.
+        Invalid city name, please try again.
       </ErrorCard>
     );
   } else if (data) {

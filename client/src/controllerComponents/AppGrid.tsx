@@ -21,35 +21,60 @@ const AppGrid: React.FC = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [currentData, setCurrentData] = useState<any>(null);
   const [forecastData, setForecastData] = useState<any>(null);
-  const [units, setUnits] = useState<string>('imperial');
+  const [units, setUnits] = useState<boolean>(false);
+
+  const degrees: string = units === true ? 'metric' : 'imperial';
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
   };
 
-  const fetchCurrentWeather = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+  const handleSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.code === 'Enter') {
-      fetch(`/api/current/${keyword}/${units}`)
-        .then(result => result.json())
-        .then(res => setCurrentData(res))
-        .then(() => setForecastData(null))
-        .then(() => setKeyword(''))
-        .catch(err => {
-          setCurrentData('error');
-          setForecastData(null);
-          console.log(err);
-        });
+      fetchCurrentWeather();
     }
   };
 
+  const fetchCurrentWeather = (): void => {
+    fetch(`/api/current/${keyword}/${degrees}`)
+      .then(result => result.json())
+      .then(res => setCurrentData(res))
+      .then(() => setForecastData(null))
+      .then(() => setKeyword(''))
+      .catch(err => {
+        setCurrentData('error');
+        setForecastData(null);
+        console.log(err);
+      });
+  };
+
   const fetchWeatherForecast = (lat: number, lon: number): void => {
-    fetch(`/api/forecast/${lat}/${lon}/${units}`)
+    fetch(`/api/forecast/${lat}/${lon}/${degrees}`)
       .then(result => result.json())
       .then(res => setForecastData(res))
       .catch(err => {
         setForecastData('error');
         console.log(err);
       });
+  };
+
+  const handleDegreesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fahrenheitToCelsius = (tempF: number) => (tempF - 32) / 1.8;
+    const celsiusToFahrenheit = (tempC: number) => (tempC * 1.8) + 32;
+
+    if (units) {
+      setUnits(false);
+      if (currentData) {
+        currentData.main.temp = celsiusToFahrenheit(currentData.main.temp);
+        currentData.main.feels_like = celsiusToFahrenheit(currentData.main.feels_like);
+      }
+    } else {
+      setUnits(true);
+      if (currentData) {
+        currentData.main.temp = fahrenheitToCelsius(currentData.main.temp);
+        currentData.main.feels_like = fahrenheitToCelsius(currentData.main.feels_like);
+      }
+    }
   };
 
   let currentWeather: JSX.Element;
@@ -64,8 +89,8 @@ const AppGrid: React.FC = () => {
   } else {
     currentWeather = (
       <WelcomeCard
-        handleChange={handleSearchChange}
-        handleEnter={fetchCurrentWeather}
+        handleSearchChange={handleSearchChange}
+        handleEnter={handleSearchEnter}
         keyword={keyword}
       />
     );
@@ -76,9 +101,11 @@ const AppGrid: React.FC = () => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TopBar
-            handleChange={handleSearchChange}
-            handleEnter={fetchCurrentWeather}
+            handleSearchChange={handleSearchChange}
+            handleEnter={handleSearchEnter}
             keyword={keyword}
+            units={units}
+            handleDegreesChange={handleDegreesChange}
           />
         </Grid>
       </Grid>

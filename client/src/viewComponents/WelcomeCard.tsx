@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
   handleEnter: (e: React.KeyboardEvent<HTMLInputElement>)  => void,
   keyword: string
 }
 
-const WelcomeCard: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
+const WelcomeCard: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword }) => {
   const classes = useStyles();
 
   return (
@@ -49,7 +49,7 @@ const WelcomeCard: React.FC<Props> = ({ handleChange, handleEnter, keyword }) =>
       </Typography>
       <Box className={classes.search}>
         <SearchInput
-          handleChange={handleChange}
+          handleChange={handleSearchChange}
           handleEnter={handleEnter}
           keyword={keyword}
         />
