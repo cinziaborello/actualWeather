@@ -5,7 +5,7 @@ const favoritesCities = {
 export const getFavorites = (): Promise<unknown> => {
   return new Promise((resolve, reject) => {
     if (Object.keys(favoritesCities).length !== 0) {
-      resolve(favoritesCities);
+      resolve(Object.keys(favoritesCities));
     } else {
       reject('No favorite city added yet');
     }

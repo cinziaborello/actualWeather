@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TopBar from '../viewComponents/TopBar';
 import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
 import WelcomeCard from '../viewComponents/WelcomeCard';
+import FavoritesList from '../viewComponents/FavoritesList';
 
 
 const useStyles = makeStyles(() =>
@@ -22,8 +23,23 @@ const AppGrid: React.FC = () => {
   const [currentData, setCurrentData] = useState<any|null>(null);
   const [forecastData, setForecastData] = useState<any|null>(null);
   const [units, setUnits] = useState<boolean>(false);
+  const [favorites, setFavorites] = useState<any>([]);
 
   const degrees: string = units === true ? 'metric' : 'imperial';
+
+  useEffect(() => {
+    fetchFavorites();
+  }, []);
+
+  const fetchFavorites = (): void => {
+    fetch('/api/favorites/')
+      .then(result => result.json())
+      .then(res => setFavorites(res))
+      .catch(err => {
+        setFavorites('error');
+        console.log(err);
+      });
+  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
@@ -53,7 +69,7 @@ const AppGrid: React.FC = () => {
       .then(result => result.json())
       .then(res => setForecastData(res))
       .catch(err => {
-        setForecastData('error');
+        setForecastData([]);
         console.log(err);
       });
   };
@@ -88,6 +104,7 @@ const AppGrid: React.FC = () => {
       }
     }
   };
+
 
   let currentWeather: JSX.Element;
   if (currentData) {
@@ -125,9 +142,10 @@ const AppGrid: React.FC = () => {
         <Grid item xs={4}>
           {currentWeather}
         </Grid>
-        {/* <Grid item xs={4}>
-          <Paper className={classes.paper}>other column</Paper>
-        </Grid> */}
+        <Grid item xs={4}>
+          {/* <Paper className={classes.paper}>other column</Paper> */}
+          <FavoritesList favorites={favorites} />
+        </Grid>
       </Grid>
       <ForecastWeather
         units={units}
