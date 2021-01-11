@@ -1,8 +1,8 @@
-const createError = require('http-errors');
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const weatherAPI = require('./controllers/weather');
+import createError from 'http-errors';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import weatherAPI from './controllers/weather';
 
 const app = express();
 const port = 8080;
@@ -12,14 +12,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set('view engine', 'html');
 
-// invoke the controller to retrieve the current weather data from the external service
+// invoke the controller to retrieve the current weather data
 app.get('/api/current/:city/:units', (req, res) => {
-  weatherAPI.getCurrentWeather(req, res);
+  weatherAPI.getCurrentWeather(req.params.city, req.params.units)
+    .then(results => {
+      res.status(200).send(results);
+    })
+    .catch(() => {
+      res.status(500).send('Error in retrieving current weather');
+    });
 });
 
-// invoke the controller to retrieve the weather forecast data from the external service
+// invoke the controller to retrieve the weather forecast data
 app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
-  weatherAPI.getForecast(req, res);
+  weatherAPI.getForecast(req.params.lat, req.params.lon, req.params.units)
+    .then(results => {
+      res.status(200).send(results);
+    })
+    .catch(() => {
+      res.status(500).send('Error in retrieving weather forecast');
+    });
 });
 
 // catch 404 and forward to error handler
