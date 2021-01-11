@@ -14,7 +14,7 @@ const StyledBox = withStyles({
 
 const StyledGridList = withStyles({
   root: {
-    background: '#ff6640',
+    background: '#ffcf33',
     padding: '1rem',
     border: 3,
     borderRadius: 10,

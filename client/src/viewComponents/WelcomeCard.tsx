@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2)
     },
     welcome: {
-      backgroundColor: '#f4f1bb',
+      backgroundColor: '#ffee33',
       border: 3,
       borderRadius: theme.shape.borderRadius,
       minHeight: '10rem',

@@ -8,7 +8,7 @@ import WeatherInfo from './WeatherInfo';
 
 const StyledCard = withStyles({
   root: {
-    background: '#f4f1bb',
+    background: '#ffee33',
     border: 3,
     borderRadius: 10,
     minHeight: '40%',
