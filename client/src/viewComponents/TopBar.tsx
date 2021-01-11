@@ -13,7 +13,7 @@ type Props = {
   handleEnter: (e: React.KeyboardEvent<HTMLInputElement>)  => void,
   keyword: string,
   units: boolean,
-  handleDegreesChange: (e: React.ChangeEvent<HTMLInputElement>)  => void
+  handleDegreesChange: ()  => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>

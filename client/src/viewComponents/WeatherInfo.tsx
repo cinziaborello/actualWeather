@@ -13,8 +13,8 @@ type Props = {
 };
 
 const WeatherInfo: React.FC<Props> = ({ header, iconSrc, description, weatherMain, actualTemp, feelsLike, units }) => {
-    let iconURL: string = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
-    let degrees: string = units === true ? 'C' : 'F';
+    const iconURL = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
+    const degrees: string = units === true ? 'C' : 'F';
 
     return (
       <Box>

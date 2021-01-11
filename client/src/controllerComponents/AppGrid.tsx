@@ -58,7 +58,7 @@ const AppGrid: React.FC = () => {
       });
   };
 
-  const handleDegreesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDegreesChange = () => {
     const fahrenheitToCelsius = (tempF: number) => (tempF - 32) / 1.8;
     const celsiusToFahrenheit = (tempC: number) => (tempC * 1.8) + 32;
 

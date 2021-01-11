@@ -43,7 +43,7 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick }) => 
       </ErrorCard>
     );
   } else if (data) {
-    let city = `${data.name}, ${data.sys.country}`;
+    const city = `${data.name}, ${data.sys.country}`;
     current = (
       <StyledCard>
         Currently in
