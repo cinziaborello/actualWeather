@@ -8,14 +8,6 @@ import Today from './Today';
 import SearchInput from './SearchInput';
 
 
-type Props = {
-  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
-  handleEnter: (e: React.KeyboardEvent<HTMLInputElement>)  => void,
-  keyword: string,
-  units: boolean,
-  handleDegreesChange: ()  => void
-}
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
@@ -28,6 +20,14 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
+
+type Props = {
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
+  handleEnter: (e: React.KeyboardEvent<HTMLInputElement>)  => void,
+  keyword: string,
+  units: boolean,
+  handleDegreesChange: ()  => void
+}
 
 const Search: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword, units, handleDegreesChange }) => {
   const classes = useStyles();

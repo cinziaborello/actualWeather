@@ -1,14 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Box, Card } from '@material-ui/core';
 import WeatherInfo from './WeatherInfo';
 
-
-const StyledCard = withStyles({
-  root: {
-    background: '#fff'
-  }
-})(Card);
 
 type Props = {
   units: boolean,
@@ -25,7 +18,7 @@ const ForecastDate: React.FC<Props> = ({ units, dayData }) => {
   let thisDayWeather: JSX.Element|null;
   if (dayData) {
     thisDayWeather = (
-      <StyledCard>
+      <Card>
         <WeatherInfo
           header={thisDate}
           iconSrc={dayData.weather[0].icon}
@@ -35,7 +28,7 @@ const ForecastDate: React.FC<Props> = ({ units, dayData }) => {
           feelsLike={dayData.feels_like.day}
           units={units}
         />
-      </StyledCard>
+      </Card>
     );
   } else {
     thisDayWeather = null;

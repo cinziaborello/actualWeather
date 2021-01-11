@@ -4,12 +4,6 @@ import { Box, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 
-type Props = {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
-  handleEnter: (e: React.KeyboardEvent<HTMLInputElement>)  => void,
-  keyword: string
-}
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     search: {
@@ -49,6 +43,12 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
+
+type Props = {
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>)  => void,
+  handleEnter: (e: React.KeyboardEvent<HTMLInputElement>)  => void,
+  keyword: string
+}
 
 const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
   const classes = useStyles();

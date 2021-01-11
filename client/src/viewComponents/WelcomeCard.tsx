@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme, fade } from '@material-ui/core/styles';
-import { Box, Card, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
+import CustomCard from '../uiComponents/CustomCard';
 import SearchInput from './SearchInput';
 
 
@@ -17,15 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '80%'
       },
       margin: theme.spacing(2)
-    },
-    welcome: {
-      backgroundColor: '#ffee33',
-      border: 3,
-      borderRadius: theme.shape.borderRadius,
-      minHeight: '10rem',
-      padding: theme.spacing(3),
-      margin: theme.spacing(3),
-      textAlign: 'center'
     }
   })
 );
@@ -40,7 +32,7 @@ const WelcomeCard: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword
   const classes = useStyles();
 
   return (
-    <Card className={classes.welcome}>
+    <CustomCard>
       <Typography variant='h6' noWrap>
         Welcome to Actual Weather!
       </Typography>
@@ -54,7 +46,7 @@ const WelcomeCard: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword
           keyword={keyword}
         />
       </Box>
-    </Card>
+    </CustomCard>
   );
 }
 

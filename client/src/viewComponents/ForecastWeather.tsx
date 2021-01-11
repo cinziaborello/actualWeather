@@ -14,7 +14,7 @@ const StyledBox = withStyles({
 
 const StyledGridList = withStyles({
   root: {
-    background: '#ffcf33',
+    background: '#ffee33',
     padding: '1rem',
     border: 3,
     borderRadius: 10,
@@ -37,7 +37,7 @@ const ForecastWeather: React.FC<Props> = ({ units, data }) => {
       </ErrorCard>
     );
   } else if (data) {
-    const fiveDaysForecast: any[] = data.daily.slice(0, 5);
+    const fiveDaysForecast: any[] = data.daily.slice(1, 6);
     forecast = (
       <StyledBox>
       <StyledGridList cols={5} cellHeight="auto" spacing={15}>
@@ -46,7 +46,7 @@ const ForecastWeather: React.FC<Props> = ({ units, data }) => {
             <ForecastDate
               units={units}
               dayData={day}
-              key={day.dt}
+              key={day.dt.toString()}
             />
           </GridListTile>
         ))}
