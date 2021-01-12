@@ -47,12 +47,12 @@ const AppGrid: React.FC = () => {
 
   const handleSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.code === 'Enter') {
-      fetchCurrentWeather();
+      fetchCurrentWeather(keyword);
     }
   };
 
-  const fetchCurrentWeather = (): void => {
-    fetch(`/api/current/${keyword}/${degrees}`)
+  const fetchCurrentWeather = (city: string): void => {
+    fetch(`/api/current/${city}/${degrees}`)
       .then(result => result.json())
       .then(res => setCurrentData(res))
       .then(() => setForecastData(null))
@@ -105,6 +105,14 @@ const AppGrid: React.FC = () => {
     }
   };
 
+  const handleViewCityClick = (name: string): void => {
+    fetchCurrentWeather(name);
+  };
+
+  const handleDeleteCityClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    console.log(e);
+  };
+
 
   let currentWeather: JSX.Element;
   if (currentData) {
@@ -144,7 +152,10 @@ const AppGrid: React.FC = () => {
         </Grid>
         <Grid item xs={4}>
           {/* <Paper className={classes.paper}>other column</Paper> */}
-          <FavoritesList favorites={favorites} />
+          <FavoritesList
+            favorites={favorites}
+            handleViewCityClick={handleViewCityClick}
+          />
         </Grid>
       </Grid>
       <ForecastWeather

@@ -9,18 +9,19 @@ import FavoriteCity from './FavoriteCity';
 
 const StyledPaper = withStyles({
   root: {
-    margin: '.5rem auto',
-    padding: '.5rem',
-    width: '90%',
+    margin: '.8rem auto',
+    paddingLeft: '1rem',
+    width: '88%',
     textAlign: 'left'
   }
 })(Paper);
 
 type Props = {
-  favorites: string[]
+  favorites: string[],
+  handleViewCityClick: (name: string)  => void
 };
 
-const FavoritesList: React.FC<Props> = ({ favorites }) => {
+const FavoritesList: React.FC<Props> = ({ favorites, handleViewCityClick }) => {
   let listOfCities: JSX.Element|null;
   if (favorites.length === 0) {
     listOfCities = (
@@ -30,7 +31,7 @@ const FavoritesList: React.FC<Props> = ({ favorites }) => {
       </ErrorCard>
     );
   } else if (favorites) {
-    const favoritesList: string[] = favorites.slice(0, 9);
+    const favoritesList: string[] = favorites.reverse().slice(0, 6);
     listOfCities = (
       <CustomCard>
         <StyledPaper>
@@ -38,6 +39,7 @@ const FavoritesList: React.FC<Props> = ({ favorites }) => {
           <FavoriteCity
             name={city}
             key={index.toString()}
+            handleViewCityClick={handleViewCityClick}
           />
           ))}
         </StyledPaper>
