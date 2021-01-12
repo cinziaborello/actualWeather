@@ -26,3 +26,15 @@ export const getForecast = (lat: string, lon: string, units: string): Promise<un
       });
   });
 };
+
+export const getAirQuality = (lat: string, lon: string): Promise<unknown> => {
+  return new Promise((resolve, reject) => {
+    axios.get(`${BASE_URL}air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(err => {
+        reject(err.message);
+      });
+  });
+};

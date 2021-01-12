@@ -2,7 +2,7 @@ import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import { getCurrentWeather, getForecast } from './controllers/weather';
+import { getCurrentWeather, getForecast, getAirQuality } from './controllers/weather';
 import { getFavorites, addFavorite, removeFavorite } from './controllers/favorites';
 
 const app = express();
@@ -32,6 +32,17 @@ app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
     })
     .catch(() => {
       res.status(500).send('Error in retrieving weather forecast');
+    });
+});
+
+// invoke the controller to retrieve air quality data
+app.get('/api/airquality/:lat/:lon', (req, res) => {
+  getAirQuality(req.params.lat, req.params.lon)
+    .then(results => {
+      res.status(200).send(results);
+    })
+    .catch(() => {
+      res.status(500).send('Error in retrieving air quality');
     });
 });
 
