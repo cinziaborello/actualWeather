@@ -7,17 +7,8 @@ import SearchInput from './SearchInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    search: {
-      backgroundColor: fade(theme.palette.common.white, 0.50),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.70)
-      },
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(5),
-        marginRight: theme.spacing(5),
-        width: '80%'
-      },
-      margin: theme.spacing(2)
+    welcome: {
+      background: theme.palette.secondary.main
     }
   })
 );
@@ -32,14 +23,14 @@ const WelcomeCard: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword
   const classes = useStyles();
 
   return (
-    <CustomCard>
+    <CustomCard className={classes.welcome}>
       <Typography variant='h6' noWrap>
         Welcome to Actual Weather!
       </Typography>
       <Typography variant='subtitle2' noWrap>
         To begin, search for a city by name
       </Typography>
-      <Box className={classes.search}>
+      <Box>
         <SearchInput
           handleChange={handleSearchChange}
           handleEnter={handleEnter}

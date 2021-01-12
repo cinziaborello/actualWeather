@@ -6,6 +6,7 @@ import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
 import WelcomeCard from '../viewComponents/WelcomeCard';
 import FavoritesList from './FavoritesList';
+import CurrentAirQuality from '../viewComponents/CurrentAirQuality';
 import { fahrenheitToCelsius, celsiusToFahrenheit } from '../helpers/degreeConverter';
 
 
@@ -23,6 +24,7 @@ const AppGrid: React.FC = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [currentData, setCurrentData] = useState<any|null>(null);
   const [forecastData, setForecastData] = useState<any|null>(null);
+  const [airData, setAirData] = useState<any|null>(null);
   const [units, setUnits] = useState<boolean>(false);
   const [favorites, setFavorites] = useState<any>([]);
 
@@ -55,7 +57,10 @@ const AppGrid: React.FC = () => {
   const fetchCurrentWeather = (city: string): void => {
     fetch(`/api/current/${city}/${degrees}`)
       .then(result => result.json())
-      .then(res => setCurrentData(res))
+      .then(res => {
+        setCurrentData(res);
+        fetchCurrentAir(res.coord.lat, res.coord.lon);
+      })
       .then(() => setForecastData(null))
       .then(() => setKeyword(''))
       .catch(err => {
@@ -71,6 +76,16 @@ const AppGrid: React.FC = () => {
       .then(res => setForecastData(res))
       .catch(err => {
         setForecastData([]);
+        console.log(err);
+      });
+  };
+
+  const fetchCurrentAir = (lat: number, lon: number): void => {
+    fetch(`/api/airquality/${lat}/${lon}`)
+      .then(result => result.json())
+      .then(res => setAirData(res))
+      .catch(err => {
+        setAirData('error');
         console.log(err);
       });
   };
@@ -115,20 +130,24 @@ const AppGrid: React.FC = () => {
   let currentWeather: JSX.Element;
   if (currentData) {
     currentWeather = (
-      <CurrentWeather
-        units={units}
-        data={currentData}
-        handleButtonClick={fetchWeatherForecast}
-        handleAddFavorite={handleAddFavorite}
-      />
+      <Grid item xs={4}>
+        <CurrentWeather
+          units={units}
+          data={currentData}
+          handleButtonClick={fetchWeatherForecast}
+          handleAddFavorite={handleAddFavorite}
+        />
+      </Grid>
     );
   } else {
     currentWeather = (
-      <WelcomeCard
-        handleSearchChange={handleSearchChange}
-        handleEnter={handleSearchEnter}
-        keyword={keyword}
-      />
+      <Grid item xs={8}>
+        <WelcomeCard
+          handleSearchChange={handleSearchChange}
+          handleEnter={handleSearchEnter}
+          keyword={keyword}
+        />
+      </Grid>
     );
   }
 
@@ -146,11 +165,11 @@ const AppGrid: React.FC = () => {
         </Grid>
       </Grid>
       <Grid container spacing={3} className={classes.root}>
+        {currentWeather}
         <Grid item xs={4}>
-          {currentWeather}
+          <CurrentAirQuality airData={airData} />
         </Grid>
-        <Grid item xs={4}>
-          {/* <Paper className={classes.paper}>other column</Paper> */}
+        <Grid item xs={2}>
           <FavoritesList
             favorites={favorites}
             fetchCurrentWeather={fetchCurrentWeather}

@@ -52,7 +52,7 @@ const FavoritesList: React.FC<Props> = ({ favorites, fetchCurrentWeather, fetchF
     listOfCities = (
       <ErrorCard>
         <ErrorIcon aria-label="error icon" />
-        We couldn't retrieve favorite cities.
+        No favorite cities.
       </ErrorCard>
     );
   } else if (favorites.length > 8) {
