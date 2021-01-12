@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.set('view engine', 'html');
 
 // invoke the controller to retrieve the current weather data
-app.get('/api/current/:city/:units', (req, res) => {
+app.get('/api/current/:city/:units', (req: express.Request, res: express.Response) => {
   getCurrentWeather(req.params.city, req.params.units)
     .then(results => {
       res.status(200).send(results);
@@ -25,7 +25,7 @@ app.get('/api/current/:city/:units', (req, res) => {
 });
 
 // invoke the controller to retrieve the weather forecast data
-app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
+app.get('/api/forecast/:lat/:lon/:units', (req: express.Request, res: express.Response) => {
   getForecast(req.params.lat, req.params.lon, req.params.units)
     .then(results => {
       res.status(200).send(results);
@@ -36,7 +36,7 @@ app.get('/api/forecast/:lat/:lon/:units', (req, res) => {
 });
 
 // invoke the controller to retrieve air quality data
-app.get('/api/airquality/:lat/:lon', (req, res) => {
+app.get('/api/airquality/:lat/:lon', (req: express.Request, res: express.Response) => {
   getAirQuality(req.params.lat, req.params.lon)
     .then(results => {
       res.status(200).send(results);
@@ -47,7 +47,7 @@ app.get('/api/airquality/:lat/:lon', (req, res) => {
 });
 
 // invoke the controller to retrieve list of favorite cities
-app.get('/api/favorites/', (req, res) => {
+app.get('/api/favorites/', (req: express.Request, res: express.Response) => {
   getFavorites()
     .then(favorites => {
       res.status(200).send(favorites);
@@ -58,7 +58,7 @@ app.get('/api/favorites/', (req, res) => {
 });
 
 // invoke the controller to add a new city to favorites
-app.post('/api/favorites/:cityName', (req, res) => {
+app.post('/api/favorites/:cityName', (req: express.Request, res: express.Response) => {
   addFavorite(req.params.cityName)
     .then(success => {
       res.status(200).send(success);
@@ -69,7 +69,7 @@ app.post('/api/favorites/:cityName', (req, res) => {
 });
 
 // invoke the controller to remove a city from favorites
-app.delete('/api/favorites/:cityName', (req, res) => {
+app.delete('/api/favorites/:cityName', (req: express.Request, res: express.Response) => {
   removeFavorite(req.params.cityName)
     .then(success => {
       res.status(200).send(success);
@@ -81,12 +81,12 @@ app.delete('/api/favorites/:cityName', (req, res) => {
 
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req: express.Request, res: express.Response, next: any) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err: any, req: express.Request, res: express.Response, next: any) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
