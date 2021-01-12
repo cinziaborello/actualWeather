@@ -7,6 +7,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import ErrorCard from '../uiComponents/ErrorCard';
 import CustomCard from '../uiComponents/CustomCard';
 import WeatherInfo from './WeatherInfo';
+import { CurrentWeatherJson } from '../jsonTypes/currentWeatherJson';
 
 
 const StyledPaper = withStyles({
@@ -19,14 +20,15 @@ const StyledPaper = withStyles({
 
 type Props = {
   units : boolean,
-  data: any,
+  data: CurrentWeatherJson|null,
   handleButtonClick: (lat: number, lon: number) => void,
-  handleAddFavorite: (city: string) => void
+  handleAddFavorite: (city: string) => void,
+  error: boolean
 };
 
-const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handleAddFavorite }) => {
+const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handleAddFavorite, error }) => {
   let current: JSX.Element|null;
-  if (data === 'error') {
+  if (error) {
     current = (
       <ErrorCard>
         <ErrorIcon aria-label="error" />
@@ -44,7 +46,7 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handl
           <WeatherInfo
             header={city}
             iconSrc={data.weather[0].icon}
-            description={data.weather.description}
+            description={data.weather[0].description}
             weatherMain={data.weather[0].main}
             actualTemp={data.main.temp}
             feelsLike={data.main.feels_like}

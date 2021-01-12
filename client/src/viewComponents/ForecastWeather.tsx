@@ -37,7 +37,7 @@ const ForecastWeather: React.FC<Props> = ({ units, data }) => {
       </ErrorCard>
     );
   } else if (data) {
-    const fiveDaysForecast: any[] = data.daily.slice(1, 6);
+    const fiveDaysForecast = data.daily.slice(1, 6);
     forecast = (
       <StyledBox>
       <StyledGridList cols={5} cellHeight="auto" spacing={15}>

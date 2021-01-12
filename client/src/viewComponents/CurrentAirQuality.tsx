@@ -6,6 +6,7 @@ import PlaceIcon from '@material-ui/icons/Place';
 import ErrorIcon from '@material-ui/icons/Error';
 import ErrorCard from '../uiComponents/ErrorCard';
 import CustomCard from '../uiComponents/CustomCard';
+import { AirdataJson } from '../jsonTypes/airdataJson';
 
 
 const StyledPaper = withStyles({
@@ -17,12 +18,13 @@ const StyledPaper = withStyles({
 })(Paper);
 
 type Props = {
-  airData: any
+  airData: AirdataJson|null,
+  error: boolean
 };
 
-const CurrentAirQuality: React.FC<Props> = ({ airData }) => {
+const CurrentAirQuality: React.FC<Props> = ({ airData, error }) => {
   let currentAir: JSX.Element|null;
-  if (airData === 'error') {
+  if (error) {
     currentAir = (
       <ErrorCard>
         <ErrorIcon aria-label="error" />

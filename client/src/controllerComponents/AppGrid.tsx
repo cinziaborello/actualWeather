@@ -8,6 +8,9 @@ import WelcomeCard from '../viewComponents/WelcomeCard';
 import FavoritesList from './FavoritesList';
 import CurrentAirQuality from '../viewComponents/CurrentAirQuality';
 import { fahrenheitToCelsius, celsiusToFahrenheit } from '../helpers/degreeConverter';
+import { AirdataJson } from '../jsonTypes/airdataJson';
+import { CurrentWeatherJson } from '../jsonTypes/currentWeatherJson';
+import { ForecastJson } from '../jsonTypes/forecastJson';
 
 
 const useStyles = makeStyles(() =>
@@ -22,11 +25,13 @@ const AppGrid: React.FC = () => {
   const classes = useStyles();
 
   const [keyword, setKeyword] = useState<string>('');
-  const [currentData, setCurrentData] = useState<any|null>(null);
+  const [currentData, setCurrentData] = useState<CurrentWeatherJson|null>(null);
+  const [currentDataError, setCurrentDataError] = useState<boolean>(false);
   const [forecastData, setForecastData] = useState<any|null>(null);
-  const [airData, setAirData] = useState<any|null>(null);
+  const [airData, setAirData] = useState<AirdataJson|null>(null);
+  const [airDataError, setAirDataError] = useState<boolean>(false);
   const [units, setUnits] = useState<boolean>(false);
-  const [favorites, setFavorites] = useState<any>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const degrees: string = units === true ? 'metric' : 'imperial';
 
@@ -63,8 +68,10 @@ const AppGrid: React.FC = () => {
       })
       .then(() => setForecastData(null))
       .then(() => setKeyword(''))
+      .then(() => setCurrentDataError(false))
       .catch(err => {
-        setCurrentData('error');
+        setCurrentDataError(true);
+        setAirData(null);
         setForecastData(null);
         console.log(err);
       });
@@ -85,7 +92,7 @@ const AppGrid: React.FC = () => {
       .then(result => result.json())
       .then(res => setAirData(res))
       .catch(err => {
-        setAirData('error');
+        setAirDataError(true);
         console.log(err);
       });
   };
@@ -93,7 +100,7 @@ const AppGrid: React.FC = () => {
   const handleDegreesChange = () => {
     if (units) {
       setUnits(false);
-      if (currentData && currentData !== 'error') {
+      if (currentData) {
         currentData.main.temp = celsiusToFahrenheit(currentData.main.temp);
         currentData.main.feels_like = celsiusToFahrenheit(currentData.main.feels_like);
       }
@@ -105,7 +112,7 @@ const AppGrid: React.FC = () => {
       }
     } else {
       setUnits(true);
-      if (currentData && currentData !== 'error') {
+      if (currentData) {
         currentData.main.temp = fahrenheitToCelsius(currentData.main.temp);
         currentData.main.feels_like = fahrenheitToCelsius(currentData.main.feels_like);
       }
@@ -128,26 +135,19 @@ const AppGrid: React.FC = () => {
 
 
   let currentWeather: JSX.Element;
-  if (currentData) {
+  if (currentData || currentDataError) {
     currentWeather = (
-      <Grid item xs={4}>
-        <CurrentWeather
-          units={units}
-          data={currentData}
-          handleButtonClick={fetchWeatherForecast}
-          handleAddFavorite={handleAddFavorite}
-        />
-      </Grid>
+      <CurrentWeather
+        units={units}
+        data={currentData}
+        handleButtonClick={fetchWeatherForecast}
+        handleAddFavorite={handleAddFavorite}
+        error={currentDataError}
+      />
     );
   } else {
     currentWeather = (
-      <Grid item xs={8}>
-        <WelcomeCard
-          handleSearchChange={handleSearchChange}
-          handleEnter={handleSearchEnter}
-          keyword={keyword}
-        />
-      </Grid>
+      <WelcomeCard />
     );
   }
 
@@ -165,9 +165,14 @@ const AppGrid: React.FC = () => {
         </Grid>
       </Grid>
       <Grid container spacing={3} className={classes.root}>
-        {currentWeather}
         <Grid item xs={4}>
-          <CurrentAirQuality airData={airData} />
+          {currentWeather}
+        </Grid>
+        <Grid item xs={4}>
+          <CurrentAirQuality
+            airData={airData}
+            error={airDataError}
+          />
         </Grid>
         <Grid item xs={2}>
           <FavoritesList
