@@ -6,6 +6,7 @@ import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
 import WelcomeCard from '../viewComponents/WelcomeCard';
 import FavoritesList from './FavoritesList';
+import { fahrenheitToCelsius, celsiusToFahrenheit } from '../helpers/degreeConverter';
 
 
 const useStyles = makeStyles(() =>
@@ -75,9 +76,6 @@ const AppGrid: React.FC = () => {
   };
 
   const handleDegreesChange = () => {
-    const fahrenheitToCelsius = (tempF: number) => (tempF - 32) / 1.8;
-    const celsiusToFahrenheit = (tempC: number) => (tempC * 1.8) + 32;
-
     if (units) {
       setUnits(false);
       if (currentData && currentData !== 'error') {
