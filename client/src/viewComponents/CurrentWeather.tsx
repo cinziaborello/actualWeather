@@ -11,7 +11,7 @@ import WeatherInfo from './WeatherInfo';
 
 const StyledPaper = withStyles({
   root: {
-    margin: '1rem auto',
+    margin: '.9rem auto',
     padding: '.5rem',
     width: '80%'
   }

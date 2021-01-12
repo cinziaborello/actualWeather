@@ -5,7 +5,7 @@ import TopBar from '../viewComponents/TopBar';
 import CurrentWeather from '../viewComponents/CurrentWeather';
 import ForecastWeather from '../viewComponents/ForecastWeather';
 import WelcomeCard from '../viewComponents/WelcomeCard';
-import FavoritesList from '../viewComponents/FavoritesList';
+import FavoritesList from './FavoritesList';
 
 
 const useStyles = makeStyles(() =>
@@ -105,18 +105,6 @@ const AppGrid: React.FC = () => {
     }
   };
 
-  const handleViewCityClick = (city: string): void => {
-    fetchCurrentWeather(city);
-  };
-
-  const handleDeleteCityClick = (city: string): void => {
-    fetch(`/api/favorites/${city}`, {
-      method: 'delete'
-    })
-      .then(() => fetchFavorites())
-      .catch(err => console.log(err));
-  };
-
   const handleAddFavorite = (city: string): void => {
     fetch(`/api/favorites/${city}`, {
       method: 'post'
@@ -124,6 +112,7 @@ const AppGrid: React.FC = () => {
       .then(() => fetchFavorites())
       .catch(err => console.log(err));
   };
+
 
   let currentWeather: JSX.Element;
   if (currentData) {
@@ -166,8 +155,8 @@ const AppGrid: React.FC = () => {
           {/* <Paper className={classes.paper}>other column</Paper> */}
           <FavoritesList
             favorites={favorites}
-            handleViewCityClick={handleViewCityClick}
-            handleDeleteCityClick={handleDeleteCityClick}
+            fetchCurrentWeather={fetchCurrentWeather}
+            fetchFavorites={fetchFavorites}
           />
         </Grid>
       </Grid>

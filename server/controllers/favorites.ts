@@ -1,5 +1,5 @@
 const favoritesCities = {
-  'SAN FRANCISCO': 'SAN FRANCISCO'
+  'SAN FRANCISCO, US': 'SAN FRANCISCO, US'
 };
 
 export const getFavorites = (): Promise<unknown> => {
