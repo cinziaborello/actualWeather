@@ -3,7 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { getCurrentWeather, getForecast } from './controllers/weather';
-import { getFavorites, addFavorites } from './controllers/favorites';
+import { getFavorites, addFavorite, removeFavorite } from './controllers/favorites';
 
 const app = express();
 const port = 8080;
@@ -48,7 +48,7 @@ app.get('/api/favorites/', (req, res) => {
 
 // invoke the controller to add a new city to favorites
 app.post('/api/favorites/:cityName', (req, res) => {
-  addFavorites(req.params.cityName)
+  addFavorite(req.params.cityName)
     .then(success => {
       res.status(200).send(success);
     })
@@ -56,6 +56,18 @@ app.post('/api/favorites/:cityName', (req, res) => {
       res.status(500).send(err);
     });
 });
+
+// invoke the controller to remove a city from favorites
+app.delete('/api/favorites/:cityName', (req, res) => {
+  removeFavorite(req.params.cityName)
+    .then(success => {
+      res.status(200).send(success);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

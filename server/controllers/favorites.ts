@@ -12,7 +12,7 @@ export const getFavorites = (): Promise<unknown> => {
   });
 };
 
-export const addFavorites = (cityName: string): Promise<unknown> => {
+export const addFavorite = (cityName: string): Promise<unknown> => {
   cityName = cityName.toUpperCase();
   return new Promise((resolve, reject) => {
     if (!favoritesCities[cityName]) {
@@ -20,6 +20,18 @@ export const addFavorites = (cityName: string): Promise<unknown> => {
       resolve('City added correctly');
     } else {
       reject('City already added');
+    }
+  });
+};
+
+export const removeFavorite = (cityName: string): Promise<unknown> => {
+  cityName = cityName.toUpperCase();
+  return new Promise((resolve, reject) => {
+    if (favoritesCities[cityName]) {
+      delete favoritesCities[cityName];
+      resolve('City removed correctly');
+    } else {
+      reject('Error in removing city');
     }
   });
 };
