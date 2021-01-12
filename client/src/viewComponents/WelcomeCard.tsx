@@ -1,22 +1,10 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import CustomCard from '../uiComponents/CustomCard';
 
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    welcome: {
-      background: theme.palette.secondary.main
-    }
-  })
-);
-
-const WelcomeCard: React.FC = () => {
-  const classes = useStyles();
-
-  return (
-    <CustomCard className={classes.welcome}>
+const WelcomeCard: React.FC = () => (
+    <CustomCard>
       <Typography variant='h6' noWrap>
         Welcome to Actual Weather!
       </Typography>
@@ -24,7 +12,6 @@ const WelcomeCard: React.FC = () => {
         To begin, search for a city by name.
       </Typography>
     </CustomCard>
-  );
-}
+);
 
 export default WelcomeCard;

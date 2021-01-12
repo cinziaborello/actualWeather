@@ -10,8 +10,7 @@ type Props = {
   handleDeleteCityClick: (city: string) => void
 };
 
-const FavoriteCity: React.FC<Props> = ({ name, handleViewCityClick, handleDeleteCityClick }) => {
-  return (
+const FavoriteCity: React.FC<Props> = ({ name, handleViewCityClick, handleDeleteCityClick }) => (
     <Box>
       <Typography variant='subtitle2' display="inline" noWrap onClick={() => handleViewCityClick(name)}>
         {name}
@@ -20,7 +19,6 @@ const FavoriteCity: React.FC<Props> = ({ name, handleViewCityClick, handleDelete
         <DeleteIcon aria-label="delete icon" />
       </IconButton>
     </Box>
-  );
-};
+);
 
 export default FavoriteCity;

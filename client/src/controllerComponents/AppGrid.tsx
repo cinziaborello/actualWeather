@@ -165,7 +165,7 @@ const AppGrid: React.FC = () => {
         </Grid>
       </Grid>
       <Grid container spacing={3} className={classes.root}>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           {currentWeather}
         </Grid>
         <Grid item xs={4}>
