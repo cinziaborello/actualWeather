@@ -27,7 +27,8 @@ const AppGrid: React.FC = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [currentData, setCurrentData] = useState<CurrentWeatherJson|null>(null);
   const [currentDataError, setCurrentDataError] = useState<boolean>(false);
-  const [forecastData, setForecastData] = useState<any|null>(null);
+  const [forecastData, setForecastData] = useState<ForecastJson[]|null>(null);
+  const [forecastDataError, setForecastDataError] = useState<boolean>(false);
   const [airData, setAirData] = useState<AirdataJson|null>(null);
   const [airDataError, setAirDataError] = useState<boolean>(false);
   const [units, setUnits] = useState<boolean>(false);
@@ -82,7 +83,7 @@ const AppGrid: React.FC = () => {
       .then(result => result.json())
       .then(res => setForecastData(res))
       .catch(err => {
-        setForecastData([]);
+        setForecastDataError(true);
         console.log(err);
       });
   };
@@ -104,8 +105,8 @@ const AppGrid: React.FC = () => {
         currentData.main.temp = celsiusToFahrenheit(currentData.main.temp);
         currentData.main.feels_like = celsiusToFahrenheit(currentData.main.feels_like);
       }
-      if (forecastData && forecastData !== 'error') {
-        forecastData.daily.forEach((forecast: any) => {
+      if (forecastData) {
+        forecastData.forEach((forecast: ForecastJson) => {
           forecast.temp.day = celsiusToFahrenheit(forecast.temp.day);
           forecast.feels_like.day = celsiusToFahrenheit(forecast.feels_like.day);
         });
@@ -116,8 +117,8 @@ const AppGrid: React.FC = () => {
         currentData.main.temp = fahrenheitToCelsius(currentData.main.temp);
         currentData.main.feels_like = fahrenheitToCelsius(currentData.main.feels_like);
       }
-      if (forecastData && forecastData !== 'error') {
-        forecastData.daily.forEach((forecast: any) => {
+      if (forecastData) {
+        forecastData.forEach((forecast: ForecastJson) => {
           forecast.temp.day = fahrenheitToCelsius(forecast.temp.day);
           forecast.feels_like.day = fahrenheitToCelsius(forecast.feels_like.day);
         });
@@ -185,6 +186,7 @@ const AppGrid: React.FC = () => {
       <ForecastWeather
         units={units}
         data={forecastData}
+        error={forecastDataError}
       />
     </div>
   );

@@ -19,7 +19,7 @@ export const getForecast = (lat: string, lon: string, units: string): Promise<un
   return new Promise((resolve, reject) => {
     axios.get(`${BASE_URL}onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=current,minutely,hourly,alerts&appid=${API_KEY}`)
       .then(response => {
-        resolve(response.data);
+        resolve(response.data.daily);
       })
       .catch(err => {
         reject(err.message);
