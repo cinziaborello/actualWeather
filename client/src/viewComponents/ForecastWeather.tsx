@@ -24,7 +24,7 @@ const StyledGridList = withStyles({
 
 type Props = {
   units: boolean,
-  data: any,
+  data: any
 };
 
 const ForecastWeather: React.FC<Props> = ({ units, data }) => {
@@ -32,7 +32,7 @@ const ForecastWeather: React.FC<Props> = ({ units, data }) => {
   if (data === 'error') {
     forecast = (
       <ErrorCard>
-        <ErrorIcon />
+        <ErrorIcon aria-label="error icon" />
           We couldn't retrieve the forecast.
       </ErrorCard>
     );

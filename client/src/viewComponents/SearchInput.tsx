@@ -56,7 +56,7 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
   return (
     <Box className={classes.search}>
       <Box className={classes.iconSearch}>
-        <SearchIcon />
+        <SearchIcon aria-label="search icon" />
       </Box>
       <InputBase
         placeholder="Search by city…"

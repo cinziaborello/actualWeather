@@ -1,23 +1,13 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Box, Card, Paper, Button } from '@material-ui/core';
+import { Box, Paper, Button, Typography } from '@material-ui/core';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ErrorIcon from '@material-ui/icons/Error';
 import ErrorCard from '../uiComponents/ErrorCard';
+import CustomCard from '../uiComponents/CustomCard';
 import WeatherInfo from './WeatherInfo';
 
-
-const StyledCard = withStyles({
-  root: {
-    background: '#ffee33',
-    border: 3,
-    borderRadius: 10,
-    minHeight: '40%',
-    padding: '1rem 0',
-    width: '100%',
-    margin: '1rem 3rem',
-    textAlign: 'center'
-  }
-})(Card);
 
 const StyledPaper = withStyles({
   root: {
@@ -30,23 +20,26 @@ const StyledPaper = withStyles({
 type Props = {
   units : boolean,
   data: any,
-  handleButtonClick: (lat: number, lon: number) => void
+  handleButtonClick: (lat: number, lon: number) => void,
+  handleAddFavorite: (city: string) => void
 };
 
-const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick }) => {
+const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handleAddFavorite }) => {
   let current: JSX.Element|null;
   if (data === 'error') {
     current = (
       <ErrorCard>
-        <ErrorIcon />
+        <ErrorIcon aria-label="error" />
         Invalid city name, please try again.
       </ErrorCard>
     );
   } else if (data) {
     const city = `${data.name}, ${data.sys.country}`;
     current = (
-      <StyledCard>
-        Currently in
+      <CustomCard>
+        <Typography display="inline" noWrap>
+          <LocationCityIcon fontSize="small" aria-label="city icon" /> Currently in
+        </Typography>
         <StyledPaper>
           <WeatherInfo
             header={city}
@@ -58,10 +51,16 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick }) => 
             units={units}
           />
         </StyledPaper>
-        <Button variant="contained" color="primary" onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>
-          See 5 days forecast
+        <Button variant="contained" color="primary" size="small" aria-label="see forecast"
+          onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>
+          See forecast
         </Button>
-      </StyledCard>
+        <Button variant="contained" color="secondary" size="small"
+          endIcon={<FavoriteBorderIcon fontSize="small" aria-label="add city to favorites" />}
+          onClick={() => handleAddFavorite(city)}>
+          Add
+        </Button>
+      </CustomCard>
     );
   } else {
     current = null;

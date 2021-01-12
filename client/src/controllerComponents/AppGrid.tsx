@@ -105,14 +105,25 @@ const AppGrid: React.FC = () => {
     }
   };
 
-  const handleViewCityClick = (name: string): void => {
-    fetchCurrentWeather(name);
+  const handleViewCityClick = (city: string): void => {
+    fetchCurrentWeather(city);
   };
 
-  const handleDeleteCityClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log(e);
+  const handleDeleteCityClick = (city: string): void => {
+    fetch(`/api/favorites/${city}`, {
+      method: 'delete'
+    })
+      .then(() => fetchFavorites())
+      .catch(err => console.log(err));
   };
 
+  const handleAddFavorite = (city: string): void => {
+    fetch(`/api/favorites/${city}`, {
+      method: 'post'
+    })
+      .then(() => fetchFavorites())
+      .catch(err => console.log(err));
+  };
 
   let currentWeather: JSX.Element;
   if (currentData) {
@@ -121,6 +132,7 @@ const AppGrid: React.FC = () => {
         units={units}
         data={currentData}
         handleButtonClick={fetchWeatherForecast}
+        handleAddFavorite={handleAddFavorite}
       />
     );
   } else {
@@ -155,6 +167,7 @@ const AppGrid: React.FC = () => {
           <FavoritesList
             favorites={favorites}
             handleViewCityClick={handleViewCityClick}
+            handleDeleteCityClick={handleDeleteCityClick}
           />
         </Grid>
       </Grid>

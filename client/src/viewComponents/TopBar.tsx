@@ -36,8 +36,8 @@ const Search: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword, uni
     <Box className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <CloudIcon />
-          <WbSunnyIcon />
+          <CloudIcon aria-label="cloud icon" />
+          <WbSunnyIcon aria-label="sun icon" />
           <Typography variant="h4" noWrap>
               Actual Weather
           </Typography>
@@ -46,7 +46,7 @@ const Search: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword, uni
             handleEnter={handleEnter}
             keyword={keyword}
           />
-          <TodayIcon />
+          <TodayIcon aria-label="today calendar icon" />
           <Today />
           <Box className={classes.unitsSwitch}>
             <Typography variant="h6" display="inline" noWrap>
