@@ -55,7 +55,7 @@ const FavoritesList: React.FC<Props> = ({ favorites, fetchCurrentWeather, fetchF
         We couldn't retrieve favorite cities.
       </ErrorCard>
     );
-  } else if (favorites) {
+  } else if (favorites.length > 8) {
     if (!isExpanded) {
       const favoritesList: string[] = favorites.slice(0, 8);
       listOfCities = (
@@ -103,7 +103,23 @@ const FavoritesList: React.FC<Props> = ({ favorites, fetchCurrentWeather, fetchF
       );
     }
   } else {
-    listOfCities = null;
+    listOfCities = (
+      <CustomCard>
+        <Typography display="inline" noWrap>
+          <FavoriteIcon fontSize="small" aria-label="favorites icon" /> Favorite cities
+        </Typography>
+        <StyledPaper>
+          {favorites.map((city: string, index: number) => (
+            <FavoriteCity
+              name={city}
+              key={index.toString()}
+              handleViewCityClick={handleViewCityClick}
+              handleDeleteCityClick={handleDeleteCityClick}
+            />
+          ))}
+        </StyledPaper>
+      </CustomCard>
+    );
   }
 
   return (

@@ -36,7 +36,7 @@ const AppGrid: React.FC = () => {
       .then(result => result.json())
       .then(res => setFavorites(res))
       .catch(err => {
-        setFavorites('error');
+        setFavorites([]);
         console.log(err);
       });
   };
