@@ -15,7 +15,7 @@ const StyledBox = withStyles({
 
 const StyledGridList = withStyles({
   root: {
-    background: '#ffee33',
+    background: '#505050',
     padding: '1rem',
     border: 3,
     borderRadius: 10,
@@ -30,21 +30,21 @@ type Props = {
 };
 
 const ForecastWeather: React.FC<Props> = ({ units, data, error }) => {
+
   let forecast: JSX.Element|null;
   if (error) {
     forecast = (
-      <ErrorCard>
-        <ErrorIcon aria-label="error icon" />
+      <ErrorCard role="alert" aria-label="error message, no forecast data available">
+        <ErrorIcon aria-hidden="true" />
           We couldn't retrieve the forecast.
       </ErrorCard>
     );
   } else if (data) {
-    const fiveDaysForecast = data.slice(1, 6);
+    const fiveDaysForecast: ForecastJson[] = data.slice(1, 6);
     forecast = (
-      <StyledBox>
-      <StyledGridList cols={5} cellHeight="auto" spacing={15}>
-        {fiveDaysForecast.map((day: ForecastJson) => (
-          <GridListTile>
+      <StyledGridList cols={5} cellHeight="auto" spacing={15} aria-setsize={5} aria-label="five day forecast">
+        {fiveDaysForecast.map((day: ForecastJson, index: number) => (
+          <GridListTile aria-posinset={index}>
             <ForecastDate
               units={units}
               dayData={day}
@@ -53,16 +53,17 @@ const ForecastWeather: React.FC<Props> = ({ units, data, error }) => {
           </GridListTile>
         ))}
       </StyledGridList>
-      </StyledBox>
     );
   } else {
     forecast = null;
   }
 
   return (
-    <Box>
-      {forecast}
-    </Box>
+    <section aria-live="assertive" aria-atomic="true">
+      <StyledBox aria-hidden="true">
+        {forecast}
+      </StyledBox>
+    </section>
   );
 };
 

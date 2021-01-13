@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Box, Paper, Button, Typography } from '@material-ui/core';
+import { Paper, Button, Typography } from '@material-ui/core';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -30,36 +30,41 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handl
   let current: JSX.Element|null;
   if (error) {
     current = (
-      <ErrorCard>
-        <ErrorIcon aria-label="error" />
+      <ErrorCard role="alert" aria-label="error message, invalid search">
+        <ErrorIcon aria-hidden="true" />
         Invalid city name, please try again.
       </ErrorCard>
     );
   } else if (data) {
     const city = `${data.name}, ${data.sys.country}`;
     current = (
-      <CustomCard>
-        <Typography display="inline" noWrap>
-          <LocationCityIcon fontSize="small" aria-label="city icon" /> Currently in
-        </Typography>
-        <StyledPaper>
-          <WeatherInfo
-            header={city}
-            iconSrc={data.weather[0].icon}
-            description={data.weather[0].description}
-            weatherMain={data.weather[0].main}
-            actualTemp={data.main.temp}
-            feelsLike={data.main.feels_like}
-            units={units}
-          />
-        </StyledPaper>
-        <Button variant="contained" color="primary" size="small" aria-label="see forecast"
+      <CustomCard aria-hidden="true">
+        <header>
+          <Typography display="inline" noWrap>
+            <LocationCityIcon fontSize="small" aria-hidden="true" /> Currently in
+          </Typography>
+        </header>
+        <section>
+          <StyledPaper aria-live="assertive" aria-atomic="true">
+            <WeatherInfo
+              header={city}
+              iconSrc={data.weather[0].icon}
+              description={data.weather[0].description}
+              weatherMain={data.weather[0].main}
+              actualTemp={data.main.temp}
+              feelsLike={data.main.feels_like}
+              units={units}
+            />
+          </StyledPaper>
+        </section>
+        <Button variant="contained" color="primary" size="small" aria-label="click to see forecast"
           onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>
           See forecast
         </Button>
-        <Button variant="contained" color="secondary" size="small"
-          endIcon={<FavoriteBorderIcon fontSize="small" aria-label="add city to favorites" />}
-          onClick={() => handleAddFavorite(city)}>
+        <Button variant="contained" color="default" size="small"
+          endIcon={<FavoriteBorderIcon fontSize="small" aria-hidden="true" />}
+          onClick={() => handleAddFavorite(city)}
+          aria-label="add city to favorites">
           Add
         </Button>
       </CustomCard>
@@ -69,9 +74,9 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handl
   }
 
   return (
-    <Box>
+    <article>
       {current}
-    </Box>
+    </article>
   );
 };
 

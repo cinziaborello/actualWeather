@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
 import WeatherInfo from './WeatherInfo';
 import { ForecastJson } from '../jsonTypes/forecastJson';
 
@@ -16,10 +16,9 @@ const ForecastDate: React.FC<Props> = ({ units, dayData }) => {
     year:  'numeric'
   });
 
-  let thisDayWeather: JSX.Element|null;
-  if (dayData) {
-    thisDayWeather = (
-      <Card>
+  return (
+    <section>
+      <Card aria-label={`${thisDate} forecast`}>
         <WeatherInfo
           header={thisDate}
           iconSrc={dayData.weather[0].icon}
@@ -30,15 +29,7 @@ const ForecastDate: React.FC<Props> = ({ units, dayData }) => {
           units={units}
         />
       </Card>
-    );
-  } else {
-    thisDayWeather = null;
-  }
-
-  return (
-    <Box>
-      {thisDayWeather}
-    </Box>
+    </section>
   );
 };
 

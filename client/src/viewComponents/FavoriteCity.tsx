@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -11,14 +11,16 @@ type Props = {
 };
 
 const FavoriteCity: React.FC<Props> = ({ name, handleViewCityClick, handleDeleteCityClick }) => (
-    <Box>
-      <Typography variant='subtitle2' display="inline" noWrap onClick={() => handleViewCityClick(name)}>
-        {name}
-      </Typography>
-      <IconButton aria-label="delete city" size="small" onClick={() => handleDeleteCityClick(name)}>
-        <DeleteIcon aria-label="delete icon" />
+    <aside>
+      <Button onClick={() => handleViewCityClick(name)} aria-label={`click to retrieve ${name}'s weather`}>
+        <Typography variant='subtitle2' display="inline" noWrap aria-label="city name">
+          {name}
+        </Typography>
+      </Button>
+      <IconButton aria-label={`click to delete ${name} from favorites`} size="small" onClick={() => handleDeleteCityClick(name)}>
+        <DeleteIcon aria-hidden="true" />
       </IconButton>
-    </Box>
+    </aside>
 );
 
 export default FavoriteCity;

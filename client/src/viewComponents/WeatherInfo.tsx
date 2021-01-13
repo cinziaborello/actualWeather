@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 
 type Props = {
@@ -17,21 +17,25 @@ const WeatherInfo: React.FC<Props> = ({ header, iconSrc, description, weatherMai
     const degrees: string = units === true ? 'C' : 'F';
 
     return (
-      <Box>
-        <Typography variant='h5' noWrap>
-          {header}
-        </Typography>
-        <img src={iconURL} alt={description} />
-        <Typography variant='h6' noWrap>
-          {weatherMain}
-        </Typography>
-        <Typography variant='subtitle2' noWrap>
-          Actual: {actualTemp.toFixed()} {degrees}
-        </Typography>
-        <Typography variant='subtitle2' noWrap>
-          Feels like: {feelsLike.toFixed()} {degrees}
-        </Typography>
-      </Box>
+      <section aria-label="weather information">
+        <header>
+          <Typography variant='h5' noWrap>
+            {header}
+          </Typography>
+        </header>
+        <img src={iconURL} alt={description} title={description} aria-label="icon representing current weather" />
+        <section>
+          <Typography variant='h6' noWrap>
+            {weatherMain}
+          </Typography>
+          <Typography variant='subtitle2' noWrap>
+            Actual: {actualTemp.toFixed()} {degrees}
+          </Typography>
+          <Typography variant='subtitle2' noWrap>
+            Feels like: {feelsLike.toFixed()} {degrees}
+          </Typography>
+        </section>
+      </section>
     );
 };
 

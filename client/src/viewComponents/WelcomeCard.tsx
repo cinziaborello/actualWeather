@@ -4,7 +4,8 @@ import CustomCard from '../uiComponents/CustomCard';
 
 
 const WelcomeCard: React.FC = () => (
-    <CustomCard>
+  <article>
+    <CustomCard aria-label="welcome message">
       <Typography variant='h6' noWrap>
         Welcome to Actual Weather!
       </Typography>
@@ -12,6 +13,7 @@ const WelcomeCard: React.FC = () => (
         To begin, search for a city by name.
       </Typography>
     </CustomCard>
+  </article>
 );
 
 export default WelcomeCard;

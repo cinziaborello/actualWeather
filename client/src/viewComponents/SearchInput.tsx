@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, fade } from '@material-ui/core/styles';
-import { Box, InputBase } from '@material-ui/core';
+import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -54,23 +54,24 @@ const Search: React.FC<Props> = ({ handleChange, handleEnter, keyword }) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.search}>
-      <Box className={classes.iconSearch}>
-        <SearchIcon aria-label="search icon" />
-      </Box>
+    <div className={classes.search} role="search">
+      <div className={classes.iconSearch} aria-hidden="true">
+        <SearchIcon aria-hidden="true" />
+      </div>
       <InputBase
         placeholder="Search by city…"
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ 'aria-label': 'search box' }}
         type="text"
         value={keyword}
         onChange={handleChange}
         onKeyPress={handleEnter}
+        aria-label="search input box"
+        aria-required="true"
       />
-    </Box>
+    </div>
   );
 }
 

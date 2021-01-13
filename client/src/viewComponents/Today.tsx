@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 
 const Today: React.FC = () => {
@@ -10,9 +10,9 @@ const Today: React.FC = () => {
   });
 
   return (
-    <Box>
+    <time>
       <Typography variant='h6' noWrap>{newDate}</Typography>
-    </Box>
+    </time>
   );
 };
 
