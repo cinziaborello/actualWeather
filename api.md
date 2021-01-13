@@ -5,7 +5,7 @@ The project consumes the [OpenWeather](https://openweathermap.org/api) third par
 * `/api/airquality/:lat/:lon` - to retrieve the current air quality by a given city's coordinates
 * `/api/forecast/:lat/:lon/:units` - to retrieve the weather forecast by a given city's coordinates
 * `/api/favorites/` - to retrieve the list of favorite cities
-* `/api/favorites/:cityName` - same path to both create and delete a favorite city`
+* `/api/favorites/:cityName` - same path to both create and delete a favorite city
 
 
 Examples of API route, payload, and response:
