@@ -1,13 +1,13 @@
 # ActualWeather User Flow and Views
 
-This document shows the user flow and how the components appear within the app. While the screenshots have been taken using Chrome, the semantic HTML tags and CSS styles appear consistently across the latest versions of Safari and Firefox.
+This document shows the user flow and how the components appear within the app. While the screenshots have been taken using Chrome, the semantic HTML tags and CSS styles appear consistently across the latest versions of Safari and Firefox. (Note: the app has been optimized using semantic HTML and ARIA tags for users using screenreaders).
 
 When a user opens the app the `AppGrid`, `TopBar`, `SearchInput`, `Today`, `UnitsSwitch`, `WelcomeCard`, `FavoritesList` components render. (Note: this layout needs improvement to fix the grid column width and the whitespace in the middle of the screen).
 
 ![Alt ](/screenshots/userOpensApp.png?raw=true "Screenshot of initial app render")
 
 
-A user types into the search box.
+A user types into the search box. The input field's color fades to show that it's in focus.
 
 ![Alt ](/screenshots/userTypesInSearchBox.png?raw=true "Screenshot with focus on search box")
 
@@ -37,10 +37,15 @@ If `see more cities` button is clicked the list of cities expands and the `see l
 ![Alt ](/screenshots/seeLessCities.png?raw=true "Screenshot of favorites list longer than 7 with see less button")
 
 
+If a user clicks on one of the favorite cities, current weather and air quality for that city render.
+
+![Alt ](/screenshots/clickOnFavorite.png?raw=true "Screenshot of click on a favorite city")
+
+
 If a user toggles between Fahrenheit and Celsius all components containing temperatures re-render.
 
-![Alt ](/screenshots/seeLessCities.png?raw=true "Screenshot of all weather data components with temperature in Celsius")
+![Alt ](/screenshots/switchToCelsius.png?raw=true "Screenshot of all weather data components with temperature in Celsius")
 
 
+(Note: all call to actions in the app are designed with buttons to increase keyboard accessibility).
 
-- Screenshots of each View and descriptions of the overall user flow as well as any place that you made distinct design decisions.  (Screenshots can be taken via any screenshot capture application or native methods).

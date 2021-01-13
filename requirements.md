@@ -7,7 +7,7 @@ ActualWeather is a full-stack web app to search for current weather and air qual
 
 ### High-level Components Overview
 
-`AppGrid` is a controller component in charge of the page layout as well as fetching the data to display when the page first renders. It's at the top of the components hierarchy and the other components are organized as following:
+`AppGrid` is the component in charge of the page layout as well as fetching the data to display when the page first renders. It's at the top of the components hierarchy and the other components are organized as following:
 * `TopBar`: renders at the top of page and includes the app title, the search box, current date, and the units toggle.
   * `SearchInput`: contains the search box
   * `Today`: shows today's date
@@ -68,8 +68,8 @@ The project is built following the MVC (Model View Controller) architecture patt
 
 - [x] Use of a [REST API](https://medium.com/@arteko/the-best-way-to-use-rest-apis-in-swift-95e10696c980).
 
-The project consumes the [OpenWeather](https://openweathermap.org/api) third party API.
-The API routes are:
+The project consumes the [OpenWeather](https://openweathermap.org/api) third party REST API.
+The app's API routes are:
 * `/api/current/:city/:units` - to retrieve the current weather by city name and preferred unit
 * `/api/airquality/:lat/:lon` - to retrieve the current air quality by a given city's coordinates
 * `/api/forecast/:lat/:lon/:units` - to retrieve the weather forecast by a given city's coordinates
@@ -91,7 +91,7 @@ The library was use extensively in the project, some of the components used are:
 
 - [x] An example of a reusable UI component that you have created and used in the app. This should be different than the 5 UI components from the vendor library.
 
-While there are multiple ways to create custom and reusable UI components, CustomCard and ErrorCard are based on the material-ui Card component with added CSS. They can be found in:
+While there are multiple ways to create custom and reusable UI components, `CustomCard` and `ErrorCard` are based on the material-ui Card component with additional CSS. They can be found in:
 * FavoriteList controller component
 * CurrentAirQuality view component
 * CurrentWeather view component
