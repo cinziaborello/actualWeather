@@ -42,6 +42,11 @@ If a user clicks on one of the favorite cities, current weather and air quality 
 ![Alt ](/screenshots/clickOnFavorite.png?raw=true "Screenshot of click on a favorite city")
 
 
+If a user clicks on the bin icon button next to one of the favorite cities name, this favorite city is removed.
+
+![Alt ](/screenshots/removeFavorite.png?raw=true "Screenshot of click on a delete favorite city bin icon button")
+
+
 If a user toggles between Fahrenheit and Celsius all components containing temperatures re-render.
 
 ![Alt ](/screenshots/switchToCelsius.png?raw=true "Screenshot of all weather data components with temperature in Celsius")
