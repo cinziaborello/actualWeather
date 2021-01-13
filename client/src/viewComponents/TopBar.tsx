@@ -1,22 +1,18 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import {Box, AppBar, Toolbar, Typography, Switch } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import CloudIcon from '@material-ui/icons/Cloud';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import TodayIcon from '@material-ui/icons/Today';
 import Today from './Today';
 import SearchInput from './SearchInput';
+import UnitsSwitch from './UnitsSwitch';
 
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     grow: {
       flexGrow: 1
-    },
-    unitsSwitch: {
-      padding: theme.spacing(0, 1),
-      marginLeft: theme.spacing(3),
-      color: theme.palette.common.white
     }
   })
 );
@@ -29,16 +25,16 @@ type Props = {
   handleDegreesChange: ()  => void
 }
 
-const Search: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword, units, handleDegreesChange }) => {
+const TopBar: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword, units, handleDegreesChange }) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.grow}>
+    <header className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <CloudIcon aria-label="cloud icon" />
-          <WbSunnyIcon aria-label="sun icon" />
-          <Typography variant="h4" noWrap>
+          <CloudIcon aria-hidden="true" />
+          <WbSunnyIcon aria-hidden="true" />
+          <Typography variant="h4" noWrap aria-label="website name">
               Actual Weather
           </Typography>
           <SearchInput
@@ -46,28 +42,16 @@ const Search: React.FC<Props> = ({ handleSearchChange, handleEnter, keyword, uni
             handleEnter={handleEnter}
             keyword={keyword}
           />
-          <TodayIcon aria-label="today calendar icon" />
+          <TodayIcon aria-hidden="true" />
           <Today />
-          <Box className={classes.unitsSwitch}>
-            <Typography variant="h6" display="inline" noWrap>
-              &#8457;
-            </Typography>
-            <Switch
-              checked={units}
-              onChange={handleDegreesChange}
-              name="degrees"
-              color="default"
-              size="small"
-              inputProps={{ 'aria-label': 'Switch between Fahrenheit and Celsius' }}
-            />
-            <Typography variant="h6" display="inline" noWrap>
-              &#8451;
-            </Typography>
-          </Box>
+          <UnitsSwitch
+            units={units}
+            handleDegreesChange={handleDegreesChange}
+          />
         </Toolbar>
       </AppBar>
-    </Box>
+    </header>
   );
 }
 
-export default Search;
+export default TopBar;
