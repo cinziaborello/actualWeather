@@ -153,9 +153,9 @@ const AppGrid: React.FC = () => {
   }
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+    <div className={classes.root} aria-hidden="true">
+      <Grid container spacing={3} aria-hidden="true">
+        <Grid item xs={12} aria-hidden="true">
           <TopBar
             handleSearchChange={handleSearchChange}
             handleEnter={handleSearchEnter}
@@ -165,17 +165,17 @@ const AppGrid: React.FC = () => {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={3} className={classes.root}>
-        <Grid item xs={5}>
+      <Grid container spacing={3} className={classes.root} role="main">
+        <Grid item xs={5} aria-hidden="true">
           {currentWeather}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} aria-hidden="true">
           <CurrentAirQuality
             airData={airData}
             error={airDataError}
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} aria-hidden="true">
           <FavoritesList
             favorites={favorites}
             fetchCurrentWeather={fetchCurrentWeather}
