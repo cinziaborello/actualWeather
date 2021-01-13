@@ -15,7 +15,7 @@ ActualWeather is a full-stack web app to search for current weather and air qual
 *  `CurrentWeather`: this component renders on the left of the screen, depending on the data fetching state. If no search has been performed the `WelcomeCard` component is shown instead. It presents a button to see the forecast and one to add the current city as favorite.
   * `WeatherInfo`: organizes the weather information
 * `CurrentAirQuality`: appears in the middle, between current weather and the list of favorites, once the current weather data has been fetched.
-* `FavoritesList`: is a controller component in charge of handling the create and delete operations for the list of favorites. on the right side of the screen, shows the cities that have been added to favorites. Once there are more than seven cities saved, a button to expand or contract the list appears.
+* `FavoritesList`: is a controller component in charge of handling the create and delete operations for the list of favorites. Renders on the right side of the screen, shows the cities that have been added to favorites. Once there are more than seven cities saved, a button to expand or contract the list appears.
   * `FavoritesListEntries`: splits each city into its own component
     * `FavoriteCity`: displays the name of the city and an icon button to delete it
 * `ForecastWeather`: renders once a user clicks on the see forecast button within the CurrentWeather component.
