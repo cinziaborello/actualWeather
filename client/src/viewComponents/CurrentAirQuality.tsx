@@ -52,13 +52,13 @@ const CurrentAirQuality: React.FC<Props> = ({ airData, error }) => {
             </Typography>
             <InfoIcon style={{ color: aqiColor, fontSize: 80, margin: '.5rem' }} aria-hidden="true" />
             <Typography variant='subtitle1' noWrap>
-              PM2.5 fine particulates matter: {airData.list[0].components.pm2_5}
+              <abbr title="fine particulates matter">PM2.5</abbr>: {airData.list[0].components.pm2_5}
             </Typography>
             <Typography variant='subtitle1' noWrap>
-              PM10 coarse particulates matter,: {airData.list[0].components.pm10}
+            <abbr title="coarse particulates matter">PM10</abbr>: {airData.list[0].components.pm10}
             </Typography>
             <Typography variant='subtitle2' noWrap>
-              Carbon monoxide: {airData.list[0].components.co}
+            <abbr title="Carbon monoxide">CO</abbr>: {airData.list[0].components.co}
             </Typography>
             <Typography variant='subtitle2' noWrap>
               Ozone: {airData.list[0].components.o3}
