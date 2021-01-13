@@ -61,7 +61,7 @@ const CurrentWeather: React.FC<Props> = ({ units, data, handleButtonClick, handl
           onClick={() => handleButtonClick(data.coord.lat, data.coord.lon)}>
           See forecast
         </Button>
-        <Button variant="contained" color="default" size="small"
+        <Button variant="contained" color="secondary" size="small"
           endIcon={<FavoriteBorderIcon fontSize="small" aria-hidden="true" />}
           onClick={() => handleAddFavorite(city)}
           aria-label="add city to favorites">

@@ -34,7 +34,7 @@ const CurrentAirQuality: React.FC<Props> = ({ airData, error }) => {
     );
   } else if (airData) {
     const aqiCodesMeanings: string[] = ['', 'Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
-    const aqiCodesColors: string[] = ['', 'green', 'yellow', 'orange', 'red', 'purple'];
+    const aqiCodesColors: string[] = ['', '#388e3c', '#ffea00', '#ff9100', '#d50000', '#800080'];
     const aqiDescription: string = aqiCodesMeanings[airData.list[0].main.aqi];
     const aqiColor: string = aqiCodesColors[airData.list[0].main.aqi];
 
