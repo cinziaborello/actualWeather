@@ -32,7 +32,6 @@ Consider which of these projects you’d be most excited to work on, not what yo
 
 - Use a modern JS Library/Framework like React, Angular, etc. We suggest using React.js and have included it in the project skeleton.
 - Create an application that can be interacted with in a minimum of three different ways by the user.
-- Use of at least one Service.
 - The usage of a specified architectural pattern (MVC, MVP, MVVM,  etc.)
 - Use of a [REST API](https://medium.com/@arteko/the-best-way-to-use-rest-apis-in-swift-95e10696c980).
 - Usage of at least 5 UI components from the [material-ui/@core](https://material-ui.com/) library (if you are not using React, a comparable UI library is acceptable)

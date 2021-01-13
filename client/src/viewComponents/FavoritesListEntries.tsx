@@ -7,7 +7,7 @@ import FavoriteCity from '../viewComponents/FavoriteCity';
 const StyledPaper = withStyles({
   root: {
     margin: '.7rem auto',
-    paddingLeft: '1rem',
+    paddingLeft: '.5rem',
     width: '88%',
     textAlign: 'left'
   }
