@@ -1,4 +1,6 @@
-const favoritesCities = {};
+const favoritesCities = {
+  'SAN FRANCISCO': 'SAN FRANCISCO'
+};
 
 export const getFavorites = (): Promise<unknown> => {
   return new Promise((resolve, reject) => {
